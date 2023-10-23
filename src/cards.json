@@ -6,7 +6,7 @@
             "value": 2,
             "category": "base",
             "qtyPerColor": 3,
-            "function": "add",
+            "cardFunction": "add",
             "source": "original game",
             "image": {
                 "pink": "/cards/pink/bases/scoops-pink-base-2-wafflecone.png",
@@ -19,7 +19,7 @@
             "value": 2,
             "category": "base",
             "qtyPerColor": 3,
-            "function": "add",
+            "cardFunction": "add",
             "source": "original game",
             "image": {
                 "pink": "/cards/pink/bases/scoops-pink-base-2-sugarcone.png",
@@ -32,7 +32,7 @@
             "value": 3,
             "category": "base",
             "qtyPerColor": 2,
-            "function": "add",
+            "cardFunction": "add",
             "source": "original game",
             "image": {
                 "pink": "/cards/pink/bases/scoops-pink-base-3-donut.png",
@@ -45,7 +45,7 @@
             "value": 3,
             "category": "base",
             "qtyPerColor": 2,
-            "function": "add",
+            "cardFunction": "add",
             "source": "original game",
             "image": {
                 "pink": "/cards/pink/bases/scoops-pink-base-3-cookies.png",
@@ -58,7 +58,7 @@
             "value": 1,
             "category": "base",
             "qtyPerColor": 4,
-            "function": "add",
+            "cardFunction": "add",
             "source": "original game",
             "image": {
                 "pink": "/cards/pink/bases/scoops-pink-base-1-bowl.png",
@@ -71,7 +71,7 @@
             "value": 1,
             "category": "base",
             "qtyPerColor": 4,
-            "function": "add",
+            "cardFunction": "add",
             "source": "original game",
             "image": {
                 "pink": "/cards/pink/bases/scoops-pink-base-1-cakecone.png",
@@ -84,7 +84,7 @@
             "value": 3,
             "category": "topping",
             "qtyPerColor": 2,
-            "function": "add",
+            "cardFunction": "add",
             "source": "original game",
             "image": {
                 "pink": "/cards/pink/toppings/scoops-pink-topping-3-bacon.png",
@@ -97,7 +97,7 @@
             "value": 3,
             "category": "topping",
             "qtyPerColor": 2,
-            "function": "add",
+            "cardFunction": "add",
             "source": "original game",
             "image": {
                 "pink": "/cards/pink/toppings/scoops-pink-topping-3-whippedcream.png",
@@ -110,7 +110,7 @@
             "value": 2,
             "category": "topping",
             "qtyPerColor": 3,
-            "function": "add",
+            "cardFunction": "add",
             "source": "original game",
             "image": {
                 "pink": "/cards/pink/toppings/scoops-pink-topping-2-cherries.png",
@@ -123,7 +123,7 @@
             "value": 2,
             "category": "topping",
             "qtyPerColor": 3,
-            "function": "add",
+            "cardFunction": "add",
             "source": "original game",
             "image": {
                 "pink": "/cards/pink/toppings/scoops-pink-topping-2-sprinkles.png",
@@ -136,7 +136,7 @@
             "value": 1,
             "category": "topping",
             "qtyPerColor": 4,
-            "function": "add",
+            "cardFunction": "add",
             "source": "original game",
             "image": {
                 "pink": "/cards/pink/toppings/scoops-pink-topping-1-caramel.png",
@@ -149,7 +149,7 @@
             "value": 1,
             "category": "topping",
             "qtyPerColor": 4,
-            "function": "add",
+            "cardFunction": "add",
             "source": "original game",
             "image": {
                 "pink": "/cards/pink/toppings/scoops-pink-topping-1-hotfudge.png",
