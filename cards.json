@@ -1,0 +1,160 @@
+{
+    "cards": [
+        {
+            "name": "waffle cone",
+            "colors": ["pink", "green"],
+            "value": 2,
+            "category": "base",
+            "qtyPerColor": 3,
+            "function": "add",
+            "source": "original game",
+            "image": {
+                "pink": "/cards/pink/bases/scoops-pink-base-2-wafflecone.png",
+                "green": "/cards/green/bases/scoops-green-base-2-wafflecone.png"
+            }
+        },
+        {
+            "name": "sugar cone",
+            "colors": ["pink", "green"],
+            "value": 2,
+            "category": "base",
+            "qtyPerColor": 3,
+            "function": "add",
+            "source": "original game",
+            "image": {
+                "pink": "/cards/pink/bases/scoops-pink-base-2-sugarcone.png",
+                "green": "/cards/green/bases/scoops-green-base-2-sugarcone.png"
+            }
+        },
+        {
+            "name": "donut",
+            "colors": ["pink", "green"],
+            "value": 3,
+            "category": "base",
+            "qtyPerColor": 2,
+            "function": "add",
+            "source": "original game",
+            "image": {
+                "pink": "/cards/pink/bases/scoops-pink-base-3-donut.png",
+                "green": "/cards/green/bases/scoops-green-base-3-donut.png"
+            }
+        },
+        {
+            "name": "cookies",
+            "colors": ["pink", "green"],
+            "value": 3,
+            "category": "base",
+            "qtyPerColor": 2,
+            "function": "add",
+            "source": "original game",
+            "image": {
+                "pink": "/cards/pink/bases/scoops-pink-base-3-cookies.png",
+                "green": "/cards/green/bases/scoops-green-base-3-cookies.png"
+            }
+        },
+        {
+            "name": "bowl",
+            "colors": ["pink", "green"],
+            "value": 1,
+            "category": "base",
+            "qtyPerColor": 4,
+            "function": "add",
+            "source": "original game",
+            "image": {
+                "pink": "/cards/pink/bases/scoops-pink-base-1-bowl.png",
+                "green": "/cards/green/bases/scoops-green-base-1-bowl.png"
+            }
+        },
+        {
+            "name": "cake cone",
+            "colors": ["pink", "green"],
+            "value": 1,
+            "category": "base",
+            "qtyPerColor": 4,
+            "function": "add",
+            "source": "original game",
+            "image": {
+                "pink": "/cards/pink/bases/scoops-pink-base-1-cakecone.png",
+                "green": "/cards/green/bases/scoops-green-base-1-cakecone.png"
+            }
+        },
+        {
+            "name": "bacon",
+            "colors": ["pink", "green"],
+            "value": 3,
+            "category": "topping",
+            "qtyPerColor": 2,
+            "function": "add",
+            "source": "original game",
+            "image": {
+                "pink": "/cards/pink/toppings/scoops-pink-topping-3-bacon.png",
+                "green": "/cards/green/toppings/scoops-green-topping-3-bacon.png"
+            }
+        },
+        {
+            "name": "whipped cream",
+            "colors": ["pink", "green"],
+            "value": 3,
+            "category": "topping",
+            "qtyPerColor": 2,
+            "function": "add",
+            "source": "original game",
+            "image": {
+                "pink": "/cards/pink/toppings/scoops-pink-topping-3-whippedcream.png",
+                "green": "/cards/green/toppings/scoops-green-topping-3-whippedcream.png"
+            }
+        },
+        {
+            "name": "cherries",
+            "colors": ["pink", "green"],
+            "value": 2,
+            "category": "topping",
+            "qtyPerColor": 3,
+            "function": "add",
+            "source": "original game",
+            "image": {
+                "pink": "/cards/pink/toppings/scoops-pink-topping-2-cherries.png",
+                "green": "/cards/green/toppings/scoops-green-topping-2-cherries.png"
+            }
+        },
+        {
+            "name": "sprinkles",
+            "colors": ["pink", "green"],
+            "value": 2,
+            "category": "topping",
+            "qtyPerColor": 3,
+            "function": "add",
+            "source": "original game",
+            "image": {
+                "pink": "/cards/pink/toppings/scoops-pink-topping-2-sprinkles.png",
+                "green": "/cards/green/toppings/scoops-green-topping-2-sprinkles.png"
+            }
+        },
+        {
+            "name": "caramel",
+            "colors": ["pink", "green"],
+            "value": 1,
+            "category": "topping",
+            "qtyPerColor": 4,
+            "function": "add",
+            "source": "original game",
+            "image": {
+                "pink": "/cards/pink/toppings/scoops-pink-topping-1-caramel.png",
+                "green": "/cards/green/toppings/scoops-green-topping-1-caramel.png"
+            }
+        },
+        {
+            "name": "hot fudge",
+            "colors": ["pink", "green"],
+            "value": 1,
+            "category": "topping",
+            "qtyPerColor": 4,
+            "function": "add",
+            "source": "original game",
+            "image": {
+                "pink": "/cards/pink/toppings/scoops-pink-topping-1-hotfudge.png",
+                "green": "/cards/green/toppings/scoops-green-topping-1-hotfudge.png"
+            }
+        }
+    ]
+}
