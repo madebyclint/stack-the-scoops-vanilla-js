@@ -1,7 +1,4 @@
-export enum CardColor {
-    Pink = "pink",
-    Green = "green",
-}
+export type CardColor = "pink" | "green";
 
 export enum CardType {
     Base,
@@ -26,10 +23,10 @@ export type CardImagePath = {
 
 export type Card = {
     name: string;
-    colors: CardColor;
-    value: Number;
+    colors: CardColor[];
+    value: number;
     category: CardType;
-    qtyPerColor: Number;
+    qtyPerColor: number;
     cardFunction: CardFunction;
     source: CardSource;
     image: CardImagePath;
@@ -37,7 +34,20 @@ export type Card = {
 
 export function buildDeck(cards: Card[]) {
     return cards.reduce((acc, card) => {
-        acc.push(card.name);
+        for (let i = 0; i < card.qtyPerColor; i++) {
+            card.colors.forEach((color: CardColor) => {
+                acc.push(
+                    [
+                        color,
+                        card.category,
+                        card.value,
+                        card.name.replaceAll(" ", ""),
+                    ]
+                        .join("-")
+                        .toLowerCase()
+                );
+            });
+        }
         return acc;
     }, [] as string[]);
 }

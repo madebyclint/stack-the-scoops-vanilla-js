@@ -155,6 +155,110 @@
                 "pink": "/cards/pink/toppings/scoops-pink-topping-1-hotfudge.png",
                 "green": "/cards/green/toppings/scoops-green-topping-1-hotfudge.png"
             }
+        },
+        {
+            "name": "mint chip",
+            "colors": ["pink", "green"],
+            "value": 3,
+            "category": "scoop",
+            "qtyPerColor": 2,
+            "function": "add",
+            "source": "original game",
+            "image": {
+                "pink": "/cards/pink/scoops/scoops-pink-scoop-3-mintchip.png",
+                "green": "/cards/green/scoops/scoops-green-scoop-3-mintchip.png"
+            }
+        },
+        {
+            "name": "butter pecan",
+            "colors": ["pink", "green"],
+            "value": 3,
+            "category": "scoop",
+            "qtyPerColor": 2,
+            "function": "add",
+            "source": "original game",
+            "image": {
+                "pink": "/cards/pink/scoops/scoops-pink-scoop-3-butterpecan.png",
+                "green": "/cards/green/scoops/scoops-green-scoop-3-butterpecan.png"
+            }
+        },
+        {
+            "name": "neapolitan",
+            "colors": ["pink", "green"],
+            "value": 2,
+            "category": "scoop",
+            "qtyPerColor": 3,
+            "function": "add",
+            "source": "original game",
+            "image": {
+                "pink": "/cards/pink/scoops/scoops-pink-scoop-2-neapolitan.png",
+                "green": "/cards/green/scoops/scoops-green-scoop-2-neapolitan.png"
+            }
+        },
+        {
+            "name": "strawberry",
+            "colors": ["pink", "green"],
+            "value": 2,
+            "category": "scoop",
+            "qtyPerColor": 3,
+            "function": "add",
+            "source": "original game",
+            "image": {
+                "pink": "/cards/pink/scoops/scoops-pink-scoop-2-strawberry.png",
+                "green": "/cards/green/scoops/scoops-green-scoop-2-strawberry.png"
+            }
+        },
+        {
+            "name": "chocolate",
+            "colors": ["pink", "green"],
+            "value": 1,
+            "category": "scoop",
+            "qtyPerColor": 4,
+            "function": "add",
+            "source": "original game",
+            "image": {
+                "pink": "/cards/pink/scoops/scoops-pink-scoop-1-chocolate.png",
+                "green": "/cards/green/scoops/scoops-green-scoop-1-chocolate.png"
+            }
+        },
+        {
+            "name": "vanilla",
+            "colors": ["pink", "green"],
+            "value": 1,
+            "category": "scoop",
+            "qtyPerColor": 4,
+            "function": "add",
+            "source": "original game",
+            "image": {
+                "pink": "/cards/pink/scoops/scoops-pink-scoop-1-vanilla.png",
+                "green": "/cards/green/scoops/scoops-green-scoop-1-vanilla.png"
+            }
+        },
+        {
+            "name": "double scoop",
+            "colors": ["pink", "green"],
+            "value": 2,
+            "category": "bonus",
+            "qtyPerColor": 3,
+            "cardFunction": "multiply",
+            "source": "original game",
+            "image": {
+                "pink": "/cards/pink/bonus/scoops-pink-bonus-2-doublescoop.png",
+                "green": "/cards/green/bonus/scoops-green-bonus-2-doublescoop.png"
+            }
+        },
+        {
+            "name": "triple scoop",
+            "colors": ["pink", "green"],
+            "value": 3,
+            "category": "bonus",
+            "qtyPerColor": 3,
+            "cardFunction": "multiply",
+            "source": "original game",
+            "image": {
+                "pink": "/cards/pink/bonus/scoops-pink-bonus-2-triplescoop.png",
+                "green": "/cards/green/bonus/scoops-green-bonus-2-triplescoop.png"
+            }
         }
     ]
 }
