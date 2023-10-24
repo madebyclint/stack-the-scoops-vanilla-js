@@ -81,12 +81,14 @@ export function buildDeck(deckReference: CardIndex) {
     }, [] as string[]);
 }
 
-export function shuffleArray(array: string[]) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        const temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+// Fisher Yates shuffle
+export function shuffleArray(toShuffle: string[] = []) {
+    for (let i = toShuffle.length - 1; i > 0; i -= 1) {
+        const randomIndex = Math.floor(Math.random() * (i + 1));
+        [toShuffle[i], toShuffle[randomIndex]] = [
+            toShuffle[randomIndex],
+            toShuffle[i],
+        ];
     }
-    return array;
+    return toShuffle;
 }
