@@ -5,9 +5,11 @@ import {
     buildDeck,
     buildDeckReference,
     shuffleArray,
+    updateCount,
 } from "./utilities/deck-controls";
 import { renderDeck } from "./utilities/render-controls";
 import { moveCard } from "./utilities/move-controls";
+import { constants } from "./appsettings";
 
 /* TODO: Is there a way to strong type the json here without
    color being incompatible */
@@ -19,7 +21,7 @@ let deckCount = deckShuffled.length;
 
 const renderedDeck = renderDeck(deckShuffled, deckReference);
 
-document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
+document.querySelector<HTMLElement>("#app")!.innerHTML = `
   <div class="placeholder-container">
     <div id="draw-pile" class="card-placeholder">Draw pile</div>
     <div id="discard-pile" class="card-placeholder">Discard pile</div>
@@ -35,21 +37,20 @@ renderedDeck.forEach((card) => {
 const discardPile = document.getElementById("discard-pile");
 drawPile?.addEventListener("click", discard);
 
-function updateCount() {
-    deckCount -= 1;
-    console.log("deckCount", deckCount);
-    const counter = document.getElementById("count") as HTMLDivElement;
-    counter.innerText = deckCount.toString();
-}
-
 function discard(e: Event) {
     const target = e.target as Element;
     const parent = target.closest(".card");
-    moveCard(parent as HTMLDivElement, discardPile as HTMLDivElement);
-    updateCount();
+    const counter = document.getElementById("count");
+    moveCard(
+        parent as HTMLElement,
+        discardPile as HTMLElement,
+        constants.DEFAULT_DECK_OFFSET_INCREMENT,
+        constants.DEFAULT_DECK_OFFSET_UNIT,
+        Math.abs(deckShuffled.length - deckCount)
+    );
+    deckCount = updateCount(deckCount, counter as HTMLElement);
     if (deckCount === 0) {
         alert("no more cards");
         drawPile?.removeEventListener("click", discard);
     }
-    // TODO: Add stop here when out of cards
 }

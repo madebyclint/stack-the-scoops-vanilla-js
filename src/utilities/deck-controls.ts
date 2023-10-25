@@ -87,3 +87,9 @@ export function shuffleArray(toShuffle: string[] = []) {
     }
     return toShuffle;
 }
+
+export function updateCount(count: number, htmlTarget: HTMLElement) {
+    count -= 1;
+    htmlTarget.innerText = count.toString();
+    return count;
+}
