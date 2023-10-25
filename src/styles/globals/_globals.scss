@@ -36,41 +36,6 @@ h1 {
     line-height: 1.1;
 }
 
-#app {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
-}
-
-.card {
-    width: calc(250px / 2);
-    height: calc(350px / 2);
-    border: 1px solid #fff;
-    border-radius: 5px;
-    position: absolute;
-    background: #555;
-}
-
-.card-placeholder {
-    width: calc(250px / 2);
-    height: calc(350px / 2);
-    border: 1px solid #fff;
-    border-radius: 5px;
-    color: #fff;
-    position: relative;
-}
-
-.placeholder-container {
-    display: flex;
-    gap: 50px;
-    margin: 20px;
-}
-
-.pile-counter {
-    padding: 20px;
-}
-
 @media (prefers-color-scheme: light) {
     :root {
         color: #213547;

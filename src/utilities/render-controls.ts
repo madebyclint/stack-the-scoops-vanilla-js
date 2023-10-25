@@ -25,6 +25,7 @@ export function renderCard(card: CardReference) {
 
 export function renderDeck(deckArray: string[], deckIndex: CardIndex) {
     return deckArray.map((cardId, index) => {
+        console.log("position", deckIndex[cardId].spritePosition);
         const renderedCard = renderCard(deckIndex[cardId]);
         renderedCard.style.left =
             index * constants.DEFAULT_DECK_OFFSET_INCREMENT +
@@ -33,6 +34,8 @@ export function renderDeck(deckArray: string[], deckIndex: CardIndex) {
             index * constants.DEFAULT_DECK_OFFSET_INCREMENT +
             constants.DEFAULT_DECK_OFFSET_UNIT;
         renderedCard.style.borderColor = index % 2 === 0 ? "#222" : "inherit";
+        renderedCard.style.backgroundPosition =
+            deckIndex[cardId].spritePosition;
         return renderedCard;
     });
 }

@@ -21,6 +21,7 @@ export interface CardBase {
     value: number;
     category: CardType;
     source: CardSource;
+    spritePosition: string;
 }
 
 export interface Card extends CardBase {
@@ -60,6 +61,9 @@ export function buildDeckReference(cards: Card[]) {
                 image: card.image[color],
                 source: card.source,
                 qty: card.qtyPerColor,
+                spritePosition:
+                    (card.spritePosition && card.spritePosition[color]) ||
+                    "0px -2px",
             };
         });
         return acc;

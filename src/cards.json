@@ -76,6 +76,10 @@
             "image": {
                 "pink": "/cards/pink/bases/scoops-pink-base-1-cakecone.png",
                 "green": "/cards/green/bases/scoops-green-base-1-cakecone.png"
+            },
+            "spritePosition": {
+                "pink": "-2752px 0px",
+                "green": "0px -2px"
             }
         },
         {
@@ -102,6 +106,10 @@
             "image": {
                 "pink": "/cards/pink/toppings/scoops-pink-topping-3-whippedcream.png",
                 "green": "/cards/green/toppings/scoops-green-topping-3-whippedcream.png"
+            },
+            "spritePosition": {
+                "pink": "-4668px 0px",
+                "green": "-1915px -2px"
             }
         },
         {

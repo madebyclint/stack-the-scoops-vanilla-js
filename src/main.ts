@@ -1,15 +1,13 @@
-import "./style.css";
+import "./style.scss";
 import data from "./cards.json";
 import {
     Card,
     buildDeck,
     buildDeckReference,
     shuffleArray,
-    updateCount,
 } from "./utilities/deck-controls";
 import { renderDeck } from "./utilities/render-controls";
-import { discard, moveCard } from "./utilities/move-controls";
-import { constants } from "./appsettings";
+import { discard } from "./utilities/move-controls";
 
 /* TODO: Is there a way to strong type the json here without
    color being incompatible */

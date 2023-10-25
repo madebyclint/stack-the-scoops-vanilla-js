@@ -1,0 +1,37 @@
+#app {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+.card {
+    width: calc(240px / 2);
+    height: calc(350px / 2);
+    border: 1px solid $white;
+    border-radius: 5px;
+    position: absolute;
+    background-color: $white;
+    background-image: url(/cards-spritesheet-175h.png);
+    background-size: auto 180px;
+    background-position: -4789px -2px;
+}
+
+.card-placeholder {
+    width: calc(240px / 2);
+    height: calc(350px / 2);
+    border: 1px solid $white;
+    border-radius: 5px;
+    color: $white;
+    position: relative;
+}
+
+.placeholder-container {
+    display: flex;
+    gap: 50px;
+    margin: 20px;
+}
+
+.pile-counter {
+    padding: 20px;
+}
