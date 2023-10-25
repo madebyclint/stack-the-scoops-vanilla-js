@@ -64,6 +64,11 @@ h1 {
 .placeholder-container {
     display: flex;
     gap: 50px;
+    margin: 20px;
+}
+
+.pile-counter {
+    padding: 20px;
 }
 
 @media (prefers-color-scheme: light) {
