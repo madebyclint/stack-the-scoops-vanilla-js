@@ -8,7 +8,7 @@ import {
     updateCount,
 } from "./utilities/deck-controls";
 import { renderDeck } from "./utilities/render-controls";
-import { moveCard } from "./utilities/move-controls";
+import { discard, moveCard } from "./utilities/move-controls";
 import { constants } from "./appsettings";
 
 /* TODO: Is there a way to strong type the json here without
@@ -34,23 +34,12 @@ renderedDeck.forEach((card) => {
     drawPile?.appendChild(card);
 });
 
-const discardPile = document.getElementById("discard-pile");
-drawPile?.addEventListener("click", discard);
-
-function discard(e: Event) {
-    const target = e.target as Element;
-    const parent = target.closest(".card");
-    const counter = document.getElementById("count");
-    moveCard(
-        parent as HTMLElement,
-        discardPile as HTMLElement,
-        constants.DEFAULT_DECK_OFFSET_INCREMENT,
-        constants.DEFAULT_DECK_OFFSET_UNIT,
-        Math.abs(deckShuffled.length - deckCount)
-    );
-    deckCount = updateCount(deckCount, counter as HTMLElement);
+function discardCaller(e: Event) {
+    deckCount = discard(e, deckShuffled.length, deckCount);
     if (deckCount === 0) {
         alert("no more cards");
-        drawPile?.removeEventListener("click", discard);
+        drawPile?.removeEventListener("click", discardCaller);
     }
 }
+
+drawPile?.addEventListener("click", discardCaller);
