@@ -1,11 +1,6 @@
 export type CardColor = "pink" | "green";
 
-export enum CardType {
-    Base,
-    Scoop,
-    Topping,
-    Bonus,
-}
+export type CardType = "Base" | "Scoop" | "Topping" | "Bonus";
 
 export enum CardFunction {
     Add,
