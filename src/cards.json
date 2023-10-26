@@ -11,6 +11,10 @@
             "image": {
                 "pink": "/cards/pink/bases/scoops-pink-base-2-wafflecone.png",
                 "green": "/cards/green/bases/scoops-green-base-2-wafflecone.png"
+            },
+            "spritePosition": {
+                "pink": "-358px -2px",
+                "green": "-358px -2px"
             }
         },
         {
@@ -24,6 +28,10 @@
             "image": {
                 "pink": "/cards/pink/bases/scoops-pink-base-2-sugarcone.png",
                 "green": "/cards/green/bases/scoops-green-base-2-sugarcone.png"
+            },
+            "spritePosition": {
+                "pink": "-598px -2px",
+                "green": "-598px -2px"
             }
         },
         {
@@ -37,6 +45,10 @@
             "image": {
                 "pink": "/cards/pink/bases/scoops-pink-base-3-donut.png",
                 "green": "/cards/green/bases/scoops-green-base-3-donut.png"
+            },
+            "spritePosition": {
+                "pink": "-2394px -2px",
+                "green": "-240px -2px"
             }
         },
         {
@@ -50,6 +62,10 @@
             "image": {
                 "pink": "/cards/pink/bases/scoops-pink-base-3-cookies.png",
                 "green": "/cards/green/bases/scoops-green-base-3-cookies.png"
+            },
+            "spritePosition": {
+                "pink": "-479px -2px",
+                "green": "-479px -2px"
             }
         },
         {
@@ -63,6 +79,10 @@
             "image": {
                 "pink": "/cards/pink/bases/scoops-pink-base-1-bowl.png",
                 "green": "/cards/green/bases/scoops-green-base-1-bowl.png"
+            },
+            "spritePosition": {
+                "pink": "-120px -2px",
+                "green": "-120px -2px"
             }
         },
         {
@@ -78,7 +98,7 @@
                 "green": "/cards/green/bases/scoops-green-base-1-cakecone.png"
             },
             "spritePosition": {
-                "pink": "-2752px 0px",
+                "pink": "-2752px -2px",
                 "green": "0px -2px"
             }
         },
@@ -93,6 +113,10 @@
             "image": {
                 "pink": "/cards/pink/toppings/scoops-pink-topping-3-bacon.png",
                 "green": "/cards/green/toppings/scoops-green-topping-3-bacon.png"
+            },
+            "spritePosition": {
+                "pink": "-2155px -2px",
+                "green": "-2155px -2px"
             }
         },
         {
@@ -108,7 +132,7 @@
                 "green": "/cards/green/toppings/scoops-green-topping-3-whippedcream.png"
             },
             "spritePosition": {
-                "pink": "-4668px 0px",
+                "pink": "-4668px -2px",
                 "green": "-1915px -2px"
             }
         },
@@ -123,6 +147,10 @@
             "image": {
                 "pink": "/cards/pink/toppings/scoops-pink-topping-2-cherries.png",
                 "green": "/cards/green/toppings/scoops-green-topping-2-cherries.png"
+            },
+            "spritePosition": {
+                "pink": "-1795px -2px",
+                "green": "-1795px -2px"
             }
         },
         {
@@ -136,6 +164,10 @@
             "image": {
                 "pink": "/cards/pink/toppings/scoops-pink-topping-2-sprinkles.png",
                 "green": "/cards/green/toppings/scoops-green-topping-2-sprinkles.png"
+            },
+            "spritePosition": {
+                "pink": "-2274px -2px",
+                "green": "-2274px -2px"
             }
         },
         {
@@ -149,6 +181,10 @@
             "image": {
                 "pink": "/cards/pink/toppings/scoops-pink-topping-1-caramel.png",
                 "green": "/cards/green/toppings/scoops-green-topping-1-caramel.png"
+            },
+            "spritePosition": {
+                "pink": "-1675px -2px",
+                "green": "-1675px -2px"
             }
         },
         {
@@ -162,6 +198,10 @@
             "image": {
                 "pink": "/cards/pink/toppings/scoops-pink-topping-1-hotfudge.png",
                 "green": "/cards/green/toppings/scoops-green-topping-1-hotfudge.png"
+            },
+            "spritePosition": {
+                "pink": "-2035px -2px",
+                "green": "-2035px -2px"
             }
         },
         {
@@ -175,6 +215,10 @@
             "image": {
                 "pink": "/cards/pink/scoops/scoops-pink-scoop-3-mintchip.png",
                 "green": "/cards/green/scoops/scoops-green-scoop-3-mintchip.png"
+            },
+            "spritePosition": {
+                "pink": "-1317px -2px",
+                "green": "-1317px -2px"
             }
         },
         {
@@ -188,6 +232,10 @@
             "image": {
                 "pink": "/cards/pink/scoops/scoops-pink-scoop-3-butterpecan.png",
                 "green": "/cards/green/scoops/scoops-green-scoop-3-butterpecan.png"
+            },
+            "spritePosition": {
+                "pink": "-1197px -2px",
+                "green": "-1197px -2px"
             }
         },
         {
@@ -201,6 +249,10 @@
             "image": {
                 "pink": "/cards/pink/scoops/scoops-pink-scoop-2-neapolitan.png",
                 "green": "/cards/green/scoops/scoops-green-scoop-2-neapolitan.png"
+            },
+            "spritePosition": {
+                "pink": "-1077px -2px",
+                "green": "-1077px -2px"
             }
         },
         {
@@ -214,6 +266,10 @@
             "image": {
                 "pink": "/cards/pink/scoops/scoops-pink-scoop-2-strawberry.png",
                 "green": "/cards/green/scoops/scoops-green-scoop-2-strawberry.png"
+            },
+            "spritePosition": {
+                "pink": "-957px -2px",
+                "green": "-957px -2px"
             }
         },
         {
@@ -227,6 +283,10 @@
             "image": {
                 "pink": "/cards/pink/scoops/scoops-pink-scoop-1-chocolate.png",
                 "green": "/cards/green/scoops/scoops-green-scoop-1-chocolate.png"
+            },
+            "spritePosition": {
+                "pink": "-1556px -2px",
+                "green": "-1556px -2px"
             }
         },
         {
@@ -240,6 +300,10 @@
             "image": {
                 "pink": "/cards/pink/scoops/scoops-pink-scoop-1-vanilla.png",
                 "green": "/cards/green/scoops/scoops-green-scoop-1-vanilla.png"
+            },
+            "spritePosition": {
+                "pink": "-1436px -2px",
+                "green": "-1436px -2px"
             }
         },
         {
@@ -253,6 +317,10 @@
             "image": {
                 "pink": "/cards/pink/bonus/scoops-pink-bonus-2-doublescoop.png",
                 "green": "/cards/green/bonus/scoops-green-bonus-2-doublescoop.png"
+            },
+            "spritePosition": {
+                "pink": "-718px -2px",
+                "green": "-718px -2px"
             }
         },
         {
@@ -266,6 +334,10 @@
             "image": {
                 "pink": "/cards/pink/bonus/scoops-pink-bonus-2-triplescoop.png",
                 "green": "/cards/green/bonus/scoops-green-bonus-2-triplescoop.png"
+            },
+            "spritePosition": {
+                "pink": "-837px -2px",
+                "green": "-837px -2px"
             }
         }
     ]

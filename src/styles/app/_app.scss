@@ -15,6 +15,9 @@
     background-image: url(/cards-spritesheet-175h.png);
     background-size: auto 180px;
     background-position: -4789px -2px;
+    * {
+        visibility: hidden;
+    }
 }
 
 .card-placeholder {
