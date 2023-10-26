@@ -5,11 +5,60 @@
     text-align: center;
 }
 
-.card {
-    width: calc(240px / 2);
-    height: calc(350px / 2);
+.fullsize {
+    width: 100%;
+    height: 100%;
+    background: purple;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -100;
+    overflow: hidden;
+}
+
+.card-base {
+    width: $cardWidth;
+    height: $cardHeight;
     border: 1px solid $white;
     border-radius: 5px;
+}
+
+.placeholder-base {
+    @extend .card-base;
+    color: $white;
+}
+
+.player-position {
+    @extend .placeholder-base;
+    position: absolute;
+}
+
+.player1 {
+    // bottom: calc(-0.5 * $cardHeight);
+    bottom: 0;
+    right: 50%;
+}
+
+.player2 {
+    bottom: 50%;
+    // left: calc(-0.5 * $cardWidth);
+    left: 0;
+}
+
+.player3 {
+    // top: calc(-0.5 * $cardHeight);
+    top: 0;
+    right: 50%;
+}
+
+.player4 {
+    bottom: 50%;
+    // right: calc(-0.5 * $cardWidth);
+    right: 0;
+}
+
+.card {
+    @extend .card-base;
     position: absolute;
     background-color: $white;
     background-image: url(/cards-spritesheet-175h.png);
@@ -21,11 +70,7 @@
 }
 
 .card-placeholder {
-    width: calc(240px / 2);
-    height: calc(350px / 2);
-    border: 1px solid $white;
-    border-radius: 5px;
-    color: $white;
+    @extend .card-base;
     position: relative;
 }
 

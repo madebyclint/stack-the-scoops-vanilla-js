@@ -4,9 +4,9 @@ import { updateCount } from "./deck-controls";
 export function moveCard(
     cardElement: HTMLElement,
     target: HTMLElement,
-    offsetIncrement: number,
-    offsetUnit: string = "px",
-    index: number
+    index: number,
+    offsetIncrement: number = constants.DEFAULT_DECK_OFFSET_INCREMENT,
+    offsetUnit: string = constants.DEFAULT_DECK_OFFSET_UNIT
 ) {
     cardElement.style.left = index * offsetIncrement + offsetUnit;
     cardElement.style.top = index * offsetIncrement + offsetUnit;
@@ -25,10 +25,12 @@ export function discard(
     moveCard(
         parent as HTMLElement,
         discardPile as HTMLElement,
-        constants.DEFAULT_DECK_OFFSET_INCREMENT,
-        constants.DEFAULT_DECK_OFFSET_UNIT,
         Math.abs(startingDeckCount - deckCount)
     );
     deckCount = updateCount(deckCount, counter as HTMLElement);
     return deckCount;
+}
+
+export function dealCard(card: HTMLElement, targetPlayer: HTMLElement) {
+    moveCard(card, targetPlayer, 1);
 }
