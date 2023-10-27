@@ -5,9 +5,10 @@ import {
     buildDeck,
     buildDeckReference,
     shuffleArray,
+    updateCount,
 } from "./utilities/deck-controls";
 import { renderDeck } from "./utilities/render-controls";
-import { discard } from "./utilities/move-controls";
+import { discard, moveCard } from "./utilities/move-controls";
 
 /* TODO: Is there a way to strong type the json here without
    color being incompatible */
@@ -21,10 +22,10 @@ const deckReference = buildDeckReference(cards);
 const deck = buildDeck(deckReference);
 /* 3. Shuffle the deck */
 const deckShuffled = shuffleArray(deck);
-let deckCount = deckShuffled.length;
 
 /* 4. Build the rendered deck from the shuffled virtual deck */
 const renderedDeck = renderDeck(deckShuffled, deckReference);
+let deckCount = renderedDeck.length;
 
 /* NEED HTML HERE - everything after requires the DOM to be built */
 document.querySelector<HTMLElement>("#app")!.innerHTML = `
@@ -44,6 +45,48 @@ renderedDeck.forEach((card) => {
 
 /* 6. Deal cards */
 const playerCount = 4;
+for (let i = 0; i < 7; i++) {
+    moveCard(
+        renderedDeck.pop() as HTMLElement,
+        document.getElementById("player1") as HTMLElement,
+        i,
+        10
+    );
+    deckCount = updateCount(
+        renderedDeck.length,
+        document.getElementById("count") as HTMLElement
+    );
+    moveCard(
+        renderedDeck.pop() as HTMLElement,
+        document.getElementById("player2") as HTMLElement,
+        i,
+        10
+    );
+    deckCount = updateCount(
+        renderedDeck.length,
+        document.getElementById("count") as HTMLElement
+    );
+    moveCard(
+        renderedDeck.pop() as HTMLElement,
+        document.getElementById("player3") as HTMLElement,
+        i,
+        10
+    );
+    deckCount = updateCount(
+        renderedDeck.length,
+        document.getElementById("count") as HTMLElement
+    );
+    moveCard(
+        renderedDeck.pop() as HTMLElement,
+        document.getElementById("player4") as HTMLElement,
+        i,
+        10
+    );
+    deckCount = updateCount(
+        renderedDeck.length,
+        document.getElementById("count") as HTMLElement
+    );
+}
 
 /* Sample draw function - this won't be used this way in the game,
    but just an example of how to do it */

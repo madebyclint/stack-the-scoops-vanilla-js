@@ -48,7 +48,6 @@ export type CardIndex = {
 export function buildDeckReference(cards: Card[]) {
     return cards.reduce((acc, card) => {
         card.colors.forEach((color: CardColor) => {
-            console.log("card", card);
             // https://bobbyhadz.com/blog/typescript-element-implicitly-has-any-type-expression
             const spritePosition = card.spritePosition
                 ? card.spritePosition[color as keyof typeof card.spritePosition]
