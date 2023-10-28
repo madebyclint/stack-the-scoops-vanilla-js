@@ -29,12 +29,17 @@ let deckCount = renderedDeck.length;
 
 /* NEED HTML HERE - everything after requires the DOM to be built */
 document.querySelector<HTMLElement>("#app")!.innerHTML = `
-  <div class="placeholder-container">
-    <div id="draw-pile" class="card-placeholder">Draw pile</div>
-    <div id="discard-pile" class="card-placeholder">Discard pile</div>
+  <div id="gameboard" class="gameboard fullsize">
+    <div class="drawdiscard-piles">
+        <div id="draw-pile" class="card-placeholder">Draw pile</div>
+        <div id="discard-pile" class="card-placeholder">Discard pile</div>
+    </div>
+    <div id="counter" class="pile-counter"><span id="count" class="count">${deckCount}</span> cards left</div>
+    <div id="player1" class="player-position player1 players-1">player1</div>
+    <div id="player2" class="player-position player2 players-1">player2</div>
+    <div id="player3" class="player-position player3 players-1">player3</div>
+    <div id="player4" class="player-position player4 players-1">player4</div>
   </div>
-  <div id="counter" class="pile-counter"><span id="count" class="count">${deckCount}</span> cards left</div>
-  <div id="player-canvas" class="fullsize"><div id="player1" class="player-position player1">player1</div><div id="player2" class="player-position player2">player2</div><div id="player3" class="player-position player3">player3</div><div id="player4" class="player-position player4">player4</div></div>
 `;
 
 /* 5. Create the draw pile from the rendered deck */
@@ -50,48 +55,53 @@ for (let i = 0; i < 7; i++) {
         renderedDeck.pop() as HTMLElement,
         document.getElementById("player1") as HTMLElement,
         i,
-        10
+        0,
+        10,
     );
     deckCount = updateCount(
         renderedDeck.length,
-        document.getElementById("count") as HTMLElement
+        document.getElementById("count") as HTMLElement,
     );
     moveCard(
         renderedDeck.pop() as HTMLElement,
         document.getElementById("player2") as HTMLElement,
         i,
-        10
+        10,
+        0,
     );
     deckCount = updateCount(
         renderedDeck.length,
-        document.getElementById("count") as HTMLElement
+        document.getElementById("count") as HTMLElement,
     );
     moveCard(
         renderedDeck.pop() as HTMLElement,
         document.getElementById("player3") as HTMLElement,
         i,
-        10
+        0,
+        10,
     );
     deckCount = updateCount(
         renderedDeck.length,
-        document.getElementById("count") as HTMLElement
+        document.getElementById("count") as HTMLElement,
     );
     moveCard(
         renderedDeck.pop() as HTMLElement,
         document.getElementById("player4") as HTMLElement,
         i,
-        10
+        10,
+        0,
     );
     deckCount = updateCount(
         renderedDeck.length,
-        document.getElementById("count") as HTMLElement
+        document.getElementById("count") as HTMLElement,
     );
 }
 
 /* Sample draw function - this won't be used this way in the game,
    but just an example of how to do it */
+const cardsDealt = deckShuffled.length - deckCount;
 function discardCaller(e: Event) {
-    deckCount = discard(e, deckShuffled.length, deckCount);
+    deckCount = discard(e, deckShuffled.length, deckCount, cardsDealt);
     if (deckCount === 0) {
         alert("no more cards");
         drawPile?.removeEventListener("click", discardCaller);

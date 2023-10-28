@@ -5,27 +5,39 @@ export function moveCard(
     cardElement: HTMLElement,
     target: HTMLElement,
     index: number,
-    offsetIncrement: number = constants.DEFAULT_DECK_OFFSET_INCREMENT,
-    offsetUnit: string = constants.DEFAULT_DECK_OFFSET_UNIT
+    offsetIncrementTop: number = constants.DEFAULT_DECK_OFFSET_INCREMENT,
+    offsetIncrementLeft: number = constants.DEFAULT_DECK_OFFSET_INCREMENT,
+    offsetUnit: string = constants.DEFAULT_DECK_OFFSET_UNIT,
+    startingOffsetTop: number = 0,
+    startingOffsetLeft: number = 0,
 ) {
-    cardElement.style.left = index * offsetIncrement + offsetUnit;
-    cardElement.style.top = index * offsetIncrement + offsetUnit;
+    const topMovement = index * offsetIncrementTop + startingOffsetTop;
+    const leftMovement = index * offsetIncrementLeft + startingOffsetLeft;
+    cardElement.style.left = leftMovement + offsetUnit;
+    cardElement.style.top = topMovement + offsetUnit;
     target.appendChild(cardElement);
 }
 
 export function discard(
     e: Event,
     startingDeckCount: number,
-    deckCount: number
+    deckCount: number,
+    cardsDealt: number,
 ) {
     const target = e.target as Element;
-    const parent = target.closest(".card");
+    const parent = target.closest(".card") as HTMLElement;
     const counter = document.getElementById("count");
     const discardPile = document.getElementById("discard-pile");
+    const index = Math.abs(startingDeckCount - deckCount);
     moveCard(
         parent as HTMLElement,
         discardPile as HTMLElement,
-        Math.abs(startingDeckCount - deckCount)
+        index,
+        0,
+        constants.DEFAULT_DECK_OFFSET_INCREMENT,
+        "px",
+        0,
+        cardsDealt * constants.DEFAULT_DECK_OFFSET_INCREMENT * -1,
     );
     deckCount = updateCount(deckCount, counter as HTMLElement);
     return deckCount;

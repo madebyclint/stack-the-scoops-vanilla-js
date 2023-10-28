@@ -34,9 +34,10 @@ export function renderDeck(deckArray: string[], deckIndex: CardIndex) {
         renderedCard.style.left =
             index * constants.DEFAULT_DECK_OFFSET_INCREMENT +
             constants.DEFAULT_DECK_OFFSET_UNIT;
-        renderedCard.style.top =
-            index * constants.DEFAULT_DECK_OFFSET_INCREMENT +
-            constants.DEFAULT_DECK_OFFSET_UNIT;
+        // renderedCard.style.top =
+        //     index * constants.DEFAULT_DECK_OFFSET_INCREMENT +
+        //     constants.DEFAULT_DECK_OFFSET_UNIT;
+        renderedCard.style.top = "0px";
         // renderedCard.style.borderColor = index % 2 === 0 ? "#222" : "inherit";
         renderedCard.style.backgroundPosition =
             deckIndex[cardId].spritePosition;
