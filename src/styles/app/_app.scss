@@ -1,86 +1,96 @@
 #app {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
     text-align: center;
 }
 
-.fullsize {
+.gameboard {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: auto;
+    grid-template-areas:
+        "header-a player-g player-h player-i header-b"
+        "player-f play-area play-area play-area player-j"
+        "player-e play-area play-area play-area player-k"
+        "player-d play-area play-area play-area player-l"
+        "footer-a player-c player-b player-a footer-b";
+    background: $gameboardColor;
+
     width: 100%;
     height: 100%;
-    background: purple;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -100;
     overflow: hidden;
 }
 
-.card-base {
-    width: $cardWidth;
-    height: $cardHeight;
+.card-shape {
     border: 1px solid $white;
     border-radius: 5px;
+    width: $cardWidth;
+    height: $cardHeight;
 }
 
 .placeholder-base {
-    @extend .card-base;
+    @extend .card-shape;
     color: $white;
 }
 
-.player-position {
-    @extend .placeholder-base;
-    position: absolute;
-}
-
-.player1 {
-    // bottom: calc(-0.5 * $cardHeight);
-    bottom: 0;
-    right: 50%;
-}
-
-.player2 {
-    bottom: 50%;
-    // left: calc(-0.5 * $cardWidth);
-    left: 0;
-}
-
-.player3 {
-    // top: calc(-0.5 * $cardHeight);
-    top: 0;
-    right: 50%;
-}
-
-.player4 {
-    bottom: 50%;
-    // right: calc(-0.5 * $cardWidth);
-    right: 0;
-}
-
-.card {
-    @extend .card-base;
-    position: absolute;
-    background-color: $white;
-    background-image: url(/cards-spritesheet-175h.png);
-    background-size: auto 180px;
-    background-position: -4788px -2px;
-    * {
-        visibility: hidden;
-    }
-    box-shadow: 1px 1px 1px 1px #000;
-}
-
 .card-placeholder {
-    @extend .card-base;
+    @extend .card-shape;
     position: relative;
 }
 
-.placeholder-container {
+.drawdiscard-piles {
     display: flex;
+    grid-area: play-area;
+    justify-content: center;
+    align-items: center;
     gap: 50px;
     margin: 20px;
+    background-color: darken(purple, 10);
 }
 
 .pile-counter {
     padding: 20px;
+}
+
+.player-position {
+    @extend .placeholder-base;
+    position: relative;
+}
+
+.player1 {
+    &.players-1 {
+        grid-area: player-b;
+    }
+}
+
+.player2 {
+    &.players-1 {
+        grid-area: player-e;
+    }
+}
+
+.player3 {
+    &.players-1 {
+        grid-area: player-h;
+    }
+}
+
+.player4 {
+    &.players-1 {
+        grid-area: player-k;
+    }
+}
+
+.card {
+    @extend .card-shape;
+    position: absolute;
+    box-shadow: 1px 1px 1px 1px #000;
+    background-image: url(/cards-spritesheet-175h.png);
+    background-position: -4788px -2px;
+    background-size: auto 180px;
+    background-color: $white;
+    * {
+        visibility: hidden;
+    }
 }
