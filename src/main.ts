@@ -7,7 +7,7 @@ import {
     shuffleArray,
     updateCount,
 } from "./utilities/deck-controls";
-import { renderDeck } from "./utilities/render-controls";
+import { renderDeck, createPlayer } from "./utilities/render-controls";
 import { discard, moveCard } from "./utilities/move-controls";
 
 /* TODO: Is there a way to strong type the json here without
@@ -27,20 +27,22 @@ const deckShuffled = shuffleArray(deck);
 const renderedDeck = renderDeck(deckShuffled, deckReference);
 let deckCount = renderedDeck.length;
 
+const App = function _App() {
+    return `
+        <div id="gameboard" class="gameboard fullsize">
+        <div class="drawdiscard-piles">
+            <div id="draw-pile" class="card-placeholder">Draw pile</div>
+            <div id="discard-pile" class="card-placeholder">Discard pile</div>
+        </div>
+        <div id="counter" class="pile-counter"><span id="count" class="count">${deckCount}</span> cards left</div>
+    `;
+};
+
 /* NEED HTML HERE - everything after requires the DOM to be built */
-document.querySelector<HTMLElement>("#app")!.innerHTML = `
-  <div id="gameboard" class="gameboard fullsize">
-    <div class="drawdiscard-piles">
-        <div id="draw-pile" class="card-placeholder">Draw pile</div>
-        <div id="discard-pile" class="card-placeholder">Discard pile</div>
-    </div>
-    <div id="counter" class="pile-counter"><span id="count" class="count">${deckCount}</span> cards left</div>
-    <div id="player1" class="player-position player1 players-1">player1</div>
-    <div id="player2" class="player-position player2 players-1">player2</div>
-    <div id="player3" class="player-position player3 players-1">player3</div>
-    <div id="player4" class="player-position player4 players-1">player4</div>
-  </div>
-`;
+const appElement = document.querySelector<HTMLElement>("#app")!;
+appElement.innerHTML = App();
+
+const gameboardElement = appElement.querySelector<HTMLElement>("#gameboard")!;
 
 /* 5. Create the draw pile from the rendered deck */
 const drawPile = document.getElementById("draw-pile");
@@ -50,51 +52,17 @@ renderedDeck.forEach((card) => {
 
 /* 6. Deal cards */
 const playerCount = 4;
-for (let i = 0; i < 7; i++) {
-    moveCard(
-        renderedDeck.pop() as HTMLElement,
-        document.getElementById("player1") as HTMLElement,
-        i,
-        0,
-        10,
-    );
-    deckCount = updateCount(
-        renderedDeck.length,
-        document.getElementById("count") as HTMLElement,
-    );
-    moveCard(
-        renderedDeck.pop() as HTMLElement,
-        document.getElementById("player2") as HTMLElement,
-        i,
-        10,
-        0,
-    );
-    deckCount = updateCount(
-        renderedDeck.length,
-        document.getElementById("count") as HTMLElement,
-    );
-    moveCard(
-        renderedDeck.pop() as HTMLElement,
-        document.getElementById("player3") as HTMLElement,
-        i,
-        0,
-        10,
-    );
-    deckCount = updateCount(
-        renderedDeck.length,
-        document.getElementById("count") as HTMLElement,
-    );
-    moveCard(
-        renderedDeck.pop() as HTMLElement,
-        document.getElementById("player4") as HTMLElement,
-        i,
-        10,
-        0,
-    );
-    deckCount = updateCount(
-        renderedDeck.length,
-        document.getElementById("count") as HTMLElement,
-    );
+const startingHandSize = 7;
+for (let playerIndex = 0; playerIndex < playerCount; playerIndex++) {
+    gameboardElement.appendChild(createPlayer(playerIndex + 1, playerCount));
+    const player = document.getElementById("player" + (playerIndex + 1))!;
+    for (let handIndex = 0; handIndex < startingHandSize; handIndex++) {
+        moveCard(renderedDeck.pop()!, player, handIndex, 0, 10);
+        deckCount = updateCount(
+            renderedDeck.length,
+            document.getElementById("count")!,
+        );
+    }
 }
 
 /* Sample draw function - this won't be used this way in the game,

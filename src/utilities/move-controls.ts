@@ -30,8 +30,8 @@ export function discard(
     const discardPile = document.getElementById("discard-pile");
     const index = Math.abs(startingDeckCount - deckCount);
     moveCard(
-        parent as HTMLElement,
-        discardPile as HTMLElement,
+        parent,
+        discardPile!,
         index,
         0,
         constants.DEFAULT_DECK_OFFSET_INCREMENT,

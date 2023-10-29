@@ -1,0 +1,289 @@
+.player-position {
+    @extend .placeholder-base;
+    position: relative;
+
+    .label {
+        position: absolute;
+        bottom: -50px;
+    }
+}
+
+.player1 {
+    &.players-1,
+    &.players-2,
+    &.players-3,
+    &.players-4 {
+        grid-area: player-chair-2;
+    }
+    &.players-5,
+    &.players-6,
+    &.players-7,
+    &.players-8,
+    &.players-9,
+    &.players-10,
+    &.players-11,
+    &.players-12 {
+        grid-area: player-chair-1;
+    }
+}
+
+.player2 {
+    &.players-1 {
+        display: none;
+    }
+    &.players-2 {
+        grid-area: player-chair-8;
+    }
+    &.players-3,
+    &.players-4 {
+        grid-area: player-chair-5;
+    }
+    &.players-5,
+    &.players-6,
+    &.players-7,
+    &.players-8 {
+        grid-area: player-chair-3;
+    }
+    &.players-9,
+    &.players-10,
+    &.players-11,
+    &.players-12 {
+        grid-area: player-chair-2;
+    }
+}
+
+.player3 {
+    &.players-1,
+    &.players-2 {
+        display: none;
+    }
+    &.players-3,
+    &.players-4 {
+        grid-area: player-chair-8;
+    }
+    &.players-5 {
+        grid-area: player-chair-5;
+    }
+    &.players-6,
+    &.players-7,
+    &.players-8 {
+        grid-area: player-chair-4;
+    }
+    &.players-9,
+    &.players-10,
+    &.players-11,
+    &.players-12 {
+        grid-area: player-chair-3;
+    }
+}
+
+.player4 {
+    &.players-1,
+    &.players-2,
+    &.players-3 {
+        display: none;
+    }
+    &.players-4 {
+        grid-area: player-chair-11;
+    }
+    &.players-5 {
+        grid-area: player-chair-8;
+    }
+    &.players-6,
+    &.players-7,
+    &.players-8 {
+        grid-area: player-chair-6;
+    }
+    &.players-9,
+    &.players-10,
+    &.players-11,
+    &.players-12 {
+        grid-area: player-chair-4;
+    }
+}
+
+.player5 {
+    &.players-1,
+    &.players-2,
+    &.players-3,
+    &.players-4 {
+        display: none;
+    }
+    &.players-5 {
+        grid-area: player-chair-11;
+    }
+    &.players-6 {
+        grid-area: player-chair-8;
+    }
+    &.players-7,
+    &.players-8 {
+        grid-area: player-chair-7;
+    }
+    &.players-9 {
+        grid-area: player-chair-6;
+    }
+    &.players-10,
+    &.players-11,
+    &.players-12 {
+        grid-area: player-chair-5;
+    }
+}
+
+.player6 {
+    &.players-1,
+    &.players-2,
+    &.players-3,
+    &.players-4,
+    &.players-5 {
+        display: none;
+    }
+    &.players-6 {
+        grid-area: player-chair-11;
+    }
+    &.players-7,
+    &.players-8 {
+        grid-area: player-chair-9;
+    }
+    &.players-9 {
+        grid-area: player-chair-7;
+    }
+    &.players-10,
+    &.players-11,
+    &.players-12 {
+        grid-area: player-chair-6;
+    }
+}
+
+.player7 {
+    &.players-1,
+    &.players-2,
+    &.players-3,
+    &.players-4,
+    &.players-5,
+    &.players-6 {
+        display: none;
+    }
+    &.players-7 {
+        grid-area: player-chair-11;
+    }
+    &.players-8 {
+        grid-area: player-chair-10;
+    }
+    &.players-9 {
+        grid-area: player-chair-9;
+    }
+    &.players-10,
+    &.players-11,
+    &.players-12 {
+        grid-area: player-chair-7;
+    }
+}
+
+.player8 {
+    &.players-1,
+    &.players-2,
+    &.players-3,
+    &.players-4,
+    &.players-5,
+    &.players-6,
+    &.players-7 {
+        display: none;
+    }
+    &.players-8 {
+        grid-area: player-chair-12;
+    }
+    &.players-9 {
+        grid-area: player-chair-10;
+    }
+    &.players-10 {
+        grid-area: player-chair-9;
+    }
+    &.players-11,
+    &.players-12 {
+        grid-area: player-chair-8;
+    }
+}
+
+.player9 {
+    &.players-1,
+    &.players-2,
+    &.players-3,
+    &.players-4,
+    &.players-5,
+    &.players-6,
+    &.players-7,
+    &.players-8 {
+        display: none;
+    }
+    &.players-9 {
+        grid-area: player-chair-12;
+    }
+    &.players-10 {
+        grid-area: player-chair-10;
+    }
+    &.players-11,
+    &.players-12 {
+        grid-area: player-chair-9;
+    }
+}
+
+.player10 {
+    &.players-1,
+    &.players-2,
+    &.players-3,
+    &.players-4,
+    &.players-5,
+    &.players-6,
+    &.players-7,
+    &.players-8,
+    &.players-9 {
+        display: none;
+    }
+    &.players-10 {
+        grid-area: player-chair-12;
+    }
+    &.players-11,
+    &.players-12 {
+        grid-area: player-chair-10;
+    }
+}
+
+.player11 {
+    &.players-1,
+    &.players-2,
+    &.players-3,
+    &.players-4,
+    &.players-5,
+    &.players-6,
+    &.players-7,
+    &.players-8,
+    &.players-9,
+    &.players-10 {
+        display: none;
+    }
+    &.players-11 {
+        grid-area: player-chair-12;
+    }
+    &.players-12 {
+        grid-area: player-chair-11;
+    }
+}
+
+.player12 {
+    &.players-1,
+    &.players-2,
+    &.players-3,
+    &.players-4,
+    &.players-5,
+    &.players-6,
+    &.players-7,
+    &.players-8,
+    &.players-9,
+    &.players-10,
+    &.players-11 {
+        display: none;
+    }
+    &.players-12 {
+        grid-area: player-chair-12;
+    }
+}

@@ -44,3 +44,15 @@ export function renderDeck(deckArray: string[], deckIndex: CardIndex) {
         return renderedCard;
     });
 }
+
+export function createPlayer(playerIndex: number, playerCount: number) {
+    const player = document.createElement("div");
+    player.id = "player" + playerIndex;
+    player.className = `player-position player${playerIndex} players-${playerCount}`;
+    const title = document.createElement("p");
+    title.className = "label";
+    title.innerText = "Player " + playerIndex;
+    player.appendChild(title);
+
+    return player;
+}
