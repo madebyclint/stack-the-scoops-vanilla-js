@@ -29,12 +29,36 @@ let deckCount = renderedDeck.length;
 
 const App = function _App() {
     return `
-        <div id="gameboard" class="gameboard fullsize">
-        <div class="drawdiscard-piles">
-            <div id="draw-pile" class="card-placeholder">Draw pile</div>
-            <div id="discard-pile" class="card-placeholder">Discard pile</div>
+        <div id="gameboard" class="gameboard fullsize side-by-side">
+            <div class="play-area">
+                <div id="draw-pile" class="card-placeholder">Draw pile</div>
+                <div id="discard-pile" class="card-placeholder">Discard pile</div>
+                <div id="play-piles" class="play-piles">
+                    <div id="pile1">
+                        <div id="pile1-bonus" class="card-placeholder">1-bonus</div>
+                        <div id="pile1-topping" class="card-placeholder">1-topping</div>
+                        <div id="pile1-scoops" class="card-placeholder">1-scoops</div>
+                        <div id="pile1-base" class="card-placeholder">1-base</div>
+                    </div>
+                    <div id="pile2">
+                        <div id="pile2-bonus" class="card-placeholder">2-bonus</div>
+                        <div id="pile2-topping" class="card-placeholder">2-topping</div>
+                        <div id="pile2-scoops" class="card-placeholder">2-scoops</div>
+                        <div id="pile2-base" class="card-placeholder">2-base</div>
+                    </div>
+                    <div id="pile3">
+                        <div id="pile3-bonus" class="card-placeholder">3-bonus</div>
+                        <div id="pile3-topping" class="card-placeholder">3-topping</div>
+                        <div id="pile3-scoops" class="card-placeholder">3-scoops</div>
+                        <div id="pile3-base" class="card-placeholder">3-base</div>
+                    </div>
+                </div>
+            </div>
+            <div id="counter" class="pile-counter">
+                <span id="count" class="count">${deckCount}</span> cards left
+            </div>
+            <div id="players-area"></div>
         </div>
-        <div id="counter" class="pile-counter"><span id="count" class="count">${deckCount}</span> cards left</div>
     `;
 };
 
@@ -43,6 +67,8 @@ const appElement = document.querySelector<HTMLElement>("#app")!;
 appElement.innerHTML = App();
 
 const gameboardElement = appElement.querySelector<HTMLElement>("#gameboard")!;
+const playersArea =
+    gameboardElement.querySelector<HTMLElement>("#players-area")!;
 
 /* 5. Create the draw pile from the rendered deck */
 const drawPile = document.getElementById("draw-pile");
@@ -54,7 +80,14 @@ renderedDeck.forEach((card) => {
 const playerCount = 4;
 const startingHandSize = 7;
 for (let playerIndex = 0; playerIndex < playerCount; playerIndex++) {
-    gameboardElement.appendChild(createPlayer(playerIndex + 1, playerCount));
+    if (gameboardElement.classList.contains("distributed")) {
+        gameboardElement.appendChild(
+            createPlayer(playerIndex + 1, playerCount),
+        );
+        playersArea.remove();
+    } else {
+        playersArea.appendChild(createPlayer(playerIndex + 1, playerCount));
+    }
     const player = document.getElementById("player" + (playerIndex + 1))!;
     for (let handIndex = 0; handIndex < startingHandSize; handIndex++) {
         moveCard(renderedDeck.pop()!, player, handIndex, 0, 10);
@@ -64,6 +97,10 @@ for (let playerIndex = 0; playerIndex < playerCount; playerIndex++) {
         );
     }
 }
+
+/* 7. Create starter stacks */
+const firstCard = renderedDeck.pop();
+console.log("firstCard", firstCard, deckReference[firstCard!.id]);
 
 /* Sample draw function - this won't be used this way in the game,
    but just an example of how to do it */

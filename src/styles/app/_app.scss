@@ -9,17 +9,28 @@
     display: grid;
     grid-template-rows: auto;
     grid-template-columns: auto;
-    grid-template-areas:
-        "header-a player-chair-7 player-chair-8 player-chair-9 header-b"
-        "player-chair-6 play-area play-area play-area player-chair-10"
-        "player-chair-5 play-area play-area play-area player-chair-11"
-        "player-chair-4 play-area play-area play-area player-chair-12"
-        "footer-a player-chair-3 player-chair-2 player-chair-1 footer-b";
     background: $gameboardColor;
 
     width: 100%;
     height: 100%;
     overflow: hidden;
+
+    &.distributed {
+        grid-template-areas:
+            "header-a player-chair-7 player-chair-8 player-chair-9 header-b"
+            "player-chair-6 play-area play-area play-area player-chair-10"
+            "player-chair-5 play-area play-area play-area player-chair-11"
+            "player-chair-4 play-area play-area play-area player-chair-12"
+            "footer-a player-chair-3 player-chair-2 player-chair-1 footer-b";
+    }
+
+    &.side-by-side {
+        grid-template-rows: 80px auto;
+        grid-template-columns: 25% auto;
+        grid-template-areas:
+            "header header"
+            "players-area play-area";
+    }
 }
 
 .card-shape {
@@ -39,14 +50,25 @@
     position: relative;
 }
 
-.drawdiscard-piles {
+.play-area {
     display: flex;
     grid-area: play-area;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     gap: 50px;
     margin: 20px;
     background-color: darken(purple, 10);
+    padding: 20px;
+}
+
+.play-piles {
+    display: flex;
+    gap: 10px;
+    & > * {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
 }
 
 .pile-counter {

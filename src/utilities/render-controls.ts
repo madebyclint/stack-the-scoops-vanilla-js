@@ -1,9 +1,10 @@
 import { CardColor, CardIndex, CardReference, CardType } from "./deck-controls";
 import { constants } from "../appsettings";
 
-export function renderCard(card: CardReference) {
+export function renderCard(card: CardReference, key: string) {
     const cardShell = document.createElement("div");
     cardShell.className = "card";
+    cardShell.id = key;
 
     const title = document.createElement("p");
     title.innerText = card.name;
@@ -30,7 +31,7 @@ export function renderCard(card: CardReference) {
 
 export function renderDeck(deckArray: string[], deckIndex: CardIndex) {
     return deckArray.map((cardId, index) => {
-        const renderedCard = renderCard(deckIndex[cardId]);
+        const renderedCard = renderCard(deckIndex[cardId], cardId);
         renderedCard.style.left =
             index * constants.DEFAULT_DECK_OFFSET_INCREMENT +
             constants.DEFAULT_DECK_OFFSET_UNIT;
