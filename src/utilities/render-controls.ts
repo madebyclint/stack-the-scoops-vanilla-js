@@ -3,7 +3,7 @@ import { constants } from "../appsettings";
 
 export function renderCard(card: CardReference, key: string) {
     const cardShell = document.createElement("div");
-    cardShell.className = "card";
+    cardShell.className = "card face-down";
     cardShell.id = key;
 
     const title = document.createElement("p");

@@ -77,7 +77,7 @@ renderedDeck.forEach((card) => {
 });
 
 /* 6. Deal cards */
-const playerCount = 4;
+const playerCount = 2;
 const startingHandSize = 7;
 for (let playerIndex = 0; playerIndex < playerCount; playerIndex++) {
     if (gameboardElement.classList.contains("distributed")) {
@@ -97,6 +97,17 @@ for (let playerIndex = 0; playerIndex < playerCount; playerIndex++) {
         );
     }
 }
+
+/* 7. Prep active player */
+let activePlayer = document.getElementById("player1");
+let activePlayerCards = activePlayer?.querySelectorAll(".card");
+activePlayerCards?.forEach((card: HTMLElement, index: number) => {
+    card.classList.remove("face-down");
+    card.style.left = index * 120 + "px";
+});
+activePlayer?.addEventListener("click", (e) => {
+    console.log("activePlayer", e.target);
+});
 
 /* 7. Create starter stacks */
 const firstCard = renderedDeck.pop();
