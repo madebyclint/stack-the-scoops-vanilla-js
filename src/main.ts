@@ -106,7 +106,9 @@ activePlayerCards?.forEach((card: HTMLElement, index: number) => {
     card.style.left = index * 120 + "px";
 });
 activePlayer?.addEventListener("click", (e) => {
-    console.log("activePlayer", e.target);
+    const selectedCard = e.target as HTMLElement;
+    console.log("activePlayer", selectedCard);
+    selectedCard.classList.toggle("selected");
 });
 
 /* 7. Create starter stacks */

@@ -89,4 +89,8 @@
     &.face-down {
         background-position: -4788px -2px !important;
     }
+
+    &.selected {
+        top: -10px !important;
+    }
 }
