@@ -48,6 +48,10 @@
 .card-placeholder {
     @extend .card-shape;
     position: relative;
+
+    &.eligible-to-play {
+        border: 3px solid yellow;
+    }
 }
 
 .play-area {

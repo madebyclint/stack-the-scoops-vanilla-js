@@ -1,5 +1,5 @@
 import { constants } from "../appsettings";
-import { updateCount } from "./deck-controls";
+import { CardReference, updateCount } from "./deck-controls";
 
 export function moveCard(
     cardElement: HTMLElement,
@@ -26,8 +26,8 @@ export function discard(
 ) {
     const target = e.target as Element;
     const parent = target.closest(".card") as HTMLElement;
-    const counter = document.getElementById("count");
-    const discardPile = document.getElementById("discard-pile");
+    const counter = document.querySelector("#count") as HTMLElement;
+    const discardPile = document.querySelector("#discard-pile") as HTMLElement;
     const index = Math.abs(startingDeckCount - deckCount);
     moveCard(
         parent,
@@ -45,4 +45,32 @@ export function discard(
 
 export function dealCard(card: HTMLElement, targetPlayer: HTMLElement) {
     moveCard(card, targetPlayer, 1);
+}
+
+export function findEligibleAction(card: HTMLElement, cardData: CardReference) {
+    console.log("card", card);
+    console.log("cardData", cardData);
+    card.classList.remove("face-down");
+    card.style.left = "30px";
+    card.style.top = "30px";
+    card.style.zIndex = "100";
+    const pilesContainer = document.querySelector("#play-piles") as HTMLElement;
+    console.log("piles", pilesContainer);
+    const piles = pilesContainer!.querySelectorAll(".play-pile");
+    piles.forEach((pile) => {
+        console.log("pile", pile);
+        const categoryToCheck = pile.querySelector(
+            `#${pile.id}-${cardData.category}`,
+        );
+        const children = categoryToCheck!.children;
+        if (children.length === 0) {
+            categoryToCheck!.classList.add("eligible-to-play");
+        }
+        console.log(
+            "categoryToCheck",
+            categoryToCheck,
+            children,
+            children.length,
+        );
+    });
 }

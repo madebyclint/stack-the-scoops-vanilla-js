@@ -8,7 +8,11 @@ import {
     updateCount,
 } from "./utilities/deck-controls";
 import { renderDeck, createPlayer } from "./utilities/render-controls";
-import { discard, moveCard } from "./utilities/move-controls";
+import {
+    discard,
+    findEligibleAction,
+    moveCard,
+} from "./utilities/move-controls";
 
 /* TODO: Is there a way to strong type the json here without
    color being incompatible */
@@ -34,22 +38,22 @@ const App = function _App() {
                 <div id="draw-pile" class="card-placeholder">Draw pile</div>
                 <div id="discard-pile" class="card-placeholder">Discard pile</div>
                 <div id="play-piles" class="play-piles">
-                    <div id="pile1">
+                    <div id="pile1" class="play-pile">
                         <div id="pile1-bonus" class="card-placeholder">1-bonus</div>
                         <div id="pile1-topping" class="card-placeholder">1-topping</div>
-                        <div id="pile1-scoops" class="card-placeholder">1-scoops</div>
+                        <div id="pile1-scoop" class="card-placeholder">1-scoops</div>
                         <div id="pile1-base" class="card-placeholder">1-base</div>
                     </div>
-                    <div id="pile2">
+                    <div id="pile2" class="play-pile">
                         <div id="pile2-bonus" class="card-placeholder">2-bonus</div>
                         <div id="pile2-topping" class="card-placeholder">2-topping</div>
-                        <div id="pile2-scoops" class="card-placeholder">2-scoops</div>
+                        <div id="pile2-scoop" class="card-placeholder">2-scoops</div>
                         <div id="pile2-base" class="card-placeholder">2-base</div>
                     </div>
-                    <div id="pile3">
+                    <div id="pile3" class="play-pile">
                         <div id="pile3-bonus" class="card-placeholder">3-bonus</div>
                         <div id="pile3-topping" class="card-placeholder">3-topping</div>
-                        <div id="pile3-scoops" class="card-placeholder">3-scoops</div>
+                        <div id="pile3-scoop" class="card-placeholder">3-scoops</div>
                         <div id="pile3-base" class="card-placeholder">3-base</div>
                     </div>
                 </div>
@@ -71,7 +75,7 @@ const playersArea =
     gameboardElement.querySelector<HTMLElement>("#players-area")!;
 
 /* 5. Create the draw pile from the rendered deck */
-const drawPile = document.getElementById("draw-pile");
+const drawPile = document.querySelector("#draw-pile") as HTMLElement;
 renderedDeck.forEach((card) => {
     drawPile?.appendChild(card);
 });
@@ -88,22 +92,26 @@ for (let playerIndex = 0; playerIndex < playerCount; playerIndex++) {
     } else {
         playersArea.appendChild(createPlayer(playerIndex + 1, playerCount));
     }
-    const player = document.getElementById("player" + (playerIndex + 1))!;
+    const player = document.querySelector(
+        "#player" + (playerIndex + 1),
+    )! as HTMLElement;
     for (let handIndex = 0; handIndex < startingHandSize; handIndex++) {
         moveCard(renderedDeck.pop()!, player, handIndex, 0, 10);
         deckCount = updateCount(
             renderedDeck.length,
-            document.getElementById("count")!,
+            document.querySelector("#count")! as HTMLElement,
         );
     }
 }
 
 /* 7. Prep active player */
-let activePlayer = document.getElementById("player1");
-let activePlayerCards = activePlayer?.querySelectorAll(".card");
+let activePlayer = document.querySelector("#player1") as HTMLElement;
+let activePlayerCards = activePlayer!.querySelectorAll(
+    ".card",
+) as NodeListOf<HTMLElement>;
 activePlayerCards?.forEach((card: HTMLElement, index: number) => {
     card.classList.remove("face-down");
-    card.style.left = index * 120 + "px";
+    card.style.left = index * 60 + "px";
 });
 activePlayer?.addEventListener("click", (e) => {
     const selectedCard = e.target as HTMLElement;
@@ -118,13 +126,16 @@ console.log("firstCard", firstCard, deckReference[firstCard!.id]);
 /* Sample draw function - this won't be used this way in the game,
    but just an example of how to do it */
 const cardsDealt = deckShuffled.length - deckCount;
-function discardCaller(e: Event) {
-    deckCount = discard(e, deckShuffled.length, deckCount, cardsDealt);
-    if (deckCount === 0) {
-        alert("no more cards");
-        drawPile?.removeEventListener("click", discardCaller);
-    }
+function drawCard(e: Event) {
+    const card = e.target! as HTMLElement;
+    const actions = findEligibleAction(card, deckReference[card.id]);
+    console.log("actions", actions);
+    // deckCount = discard(e, deckShuffled.length, deckCount, cardsDealt);
+    // if (deckCount === 0) {
+    //     alert("no more cards");
+    //     drawPile?.removeEventListener("click", drawCard);
+    // }
 }
 
-drawPile?.addEventListener("click", discardCaller);
+drawPile?.addEventListener("click", drawCard);
 /* End sample draw function */
