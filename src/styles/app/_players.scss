@@ -1,6 +1,7 @@
 .player-position {
     @extend .placeholder-base;
     position: relative;
+    margin-bottom: 50px;
 
     .label {
         position: absolute;

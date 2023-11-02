@@ -36,8 +36,10 @@
 .card-shape {
     border: 1px solid $white;
     border-radius: 5px;
+    aspect-ratio: calc($cardWidth / $cardHeight);
     width: $cardWidth;
-    height: $cardHeight;
+    // height: $cardHeight;
+    zoom: 0.8;
 }
 
 .placeholder-base {
@@ -86,6 +88,7 @@
     background-image: url(/cards-spritesheet-175h.png);
     background-size: auto 180px;
     background-color: $white;
+    zoom: 1;
     * {
         visibility: hidden;
     }
