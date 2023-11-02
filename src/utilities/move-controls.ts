@@ -72,5 +72,8 @@ export function findEligibleAction(card: HTMLElement, cardData: CardReference) {
             children,
             children.length,
         );
+        categoryToCheck!.addEventListener("click", (e) => {
+            moveCard(card, e.target as HTMLElement, 0);
+        });
     });
 }
