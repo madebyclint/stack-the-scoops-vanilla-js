@@ -57,6 +57,7 @@ export function findEligibleAction(card: HTMLElement, cardData: CardReference) {
     const pilesContainer = document.querySelector("#play-piles") as HTMLElement;
     console.log("piles", pilesContainer);
     const piles = pilesContainer!.querySelectorAll(".play-pile");
+    const abortController = new AbortController();
     piles.forEach((pile) => {
         console.log("pile", pile);
         const categoryToCheck = pile.querySelector(
@@ -72,8 +73,31 @@ export function findEligibleAction(card: HTMLElement, cardData: CardReference) {
             children,
             children.length,
         );
-        categoryToCheck!.addEventListener("click", (e) => {
-            moveCard(card, e.target as HTMLElement, 0);
-        });
+
+        categoryToCheck!.addEventListener(
+            "click",
+            function categoryClickHandler(e) {
+                abortController.abort();
+                console.log("abort signal", abortController.signal.aborted);
+                console.log("abort reason", abortController.signal.reason);
+                // categoryToCheck!.removeEventListener(
+                //     "click",
+                //     categoryClickHandler,
+                // );
+                const cardRect = card.getBoundingClientRect();
+                const target = e.target as HTMLElement;
+                const targetRect = target.getBoundingClientRect();
+                const toMoveX = targetRect.left - cardRect.left;
+                const toMoveY = targetRect.top - cardRect.top;
+                const animationDurationInSeconds = 0.4;
+                card.style.transition = `all ${animationDurationInSeconds}s ease-out`;
+                card.style.transform = `translate(${toMoveX}px, ${toMoveY}px)`;
+                setTimeout(() => {
+                    card.style.transform = "translate(0, 0)";
+                    moveCard(card, target, 0);
+                }, animationDurationInSeconds * 1000);
+            },
+            { signal: abortController.signal },
+        );
     });
 }
