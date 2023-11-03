@@ -74,30 +74,45 @@ export function findEligibleAction(card: HTMLElement, cardData: CardReference) {
             children.length,
         );
 
-        categoryToCheck!.addEventListener(
-            "click",
-            function categoryClickHandler(e) {
-                abortController.abort();
-                console.log("abort signal", abortController.signal.aborted);
-                console.log("abort reason", abortController.signal.reason);
-                // categoryToCheck!.removeEventListener(
-                //     "click",
-                //     categoryClickHandler,
-                // );
-                const cardRect = card.getBoundingClientRect();
-                const target = e.target as HTMLElement;
-                const targetRect = target.getBoundingClientRect();
-                const toMoveX = targetRect.left - cardRect.left;
-                const toMoveY = targetRect.top - cardRect.top;
-                const animationDurationInSeconds = 0.4;
-                card.style.transition = `all ${animationDurationInSeconds}s ease-out`;
-                card.style.transform = `translate(${toMoveX}px, ${toMoveY}px)`;
-                setTimeout(() => {
-                    card.style.transform = "translate(0, 0)";
-                    moveCard(card, target, 0);
-                }, animationDurationInSeconds * 1000);
-            },
-            { signal: abortController.signal },
-        );
+        if (categoryToCheck?.classList.contains("eligible-to-play")) {
+            categoryToCheck!.addEventListener(
+                "click",
+                (e: Event) => {
+                    categoryClickHandler(e, card, abortController);
+                },
+                { signal: abortController.signal },
+            );
+        }
+    });
+}
+
+export function categoryClickHandler(
+    e: Event,
+    cardToMove: HTMLElement,
+    abortController: AbortController,
+) {
+    abortController.abort();
+    // console.log("abort signal", abortController.signal.aborted);
+    // console.log("abort reason", abortController.signal.reason);
+    // categoryToCheck!.removeEventListener(
+    //     "click",
+    //     categoryClickHandler,
+    // );
+    const cardRect = cardToMove.getBoundingClientRect();
+    const target = e.target as HTMLElement;
+    const targetRect = target.getBoundingClientRect();
+    const toMoveX = targetRect.left - cardRect.left;
+    const toMoveY = targetRect.top - cardRect.top;
+    const animationDurationInSeconds = 0.4;
+    cardToMove.style.zIndex = "1000";
+    cardToMove.style.transition = `all ${animationDurationInSeconds}s ease-out`;
+    cardToMove.style.transform = `translate(${toMoveX}px, ${toMoveY}px)`;
+    setTimeout(() => {
+        cardToMove.style.zIndex = "unset";
+        cardToMove.style.transform = "translate(0, 0)";
+        moveCard(cardToMove, target, 0);
+    }, animationDurationInSeconds * 1000);
+    document.querySelectorAll(".eligible-to-play").forEach((eligibleCard) => {
+        eligibleCard.classList.remove("eligible-to-play");
     });
 }
