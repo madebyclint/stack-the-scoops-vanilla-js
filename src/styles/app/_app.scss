@@ -50,9 +50,10 @@
 .card-placeholder {
     @extend .card-shape;
     position: relative;
-
+    border: 3px solid darken($color: $gameboardColor, $amount: 20);
+    background: lighten($color: $gameboardColor, $amount: 0);
     &.eligible-to-play {
-        border: 3px solid yellow;
+        border-color: $white;
     }
 }
 

@@ -39,7 +39,7 @@ export function discard(
         0,
         cardsDealt * constants.DEFAULT_DECK_OFFSET_INCREMENT * -1,
     );
-    deckCount = updateCount(deckCount, counter as HTMLElement);
+    deckCount = updateCount(deckCount, counter);
     return deckCount;
 }
 
@@ -47,7 +47,11 @@ export function dealCard(card: HTMLElement, targetPlayer: HTMLElement) {
     moveCard(card, targetPlayer, 1);
 }
 
-export function findEligibleAction(card: HTMLElement, cardData: CardReference) {
+export function findEligibleAction(
+    card: HTMLElement,
+    cardData: CardReference,
+    autoPlay = false,
+) {
     console.log("card", card);
     console.log("cardData", cardData);
     card.classList.remove("face-down");
@@ -62,7 +66,7 @@ export function findEligibleAction(card: HTMLElement, cardData: CardReference) {
         console.log("pile", pile);
         const categoryToCheck = pile.querySelector(
             `#${pile.id}-${cardData.category}`,
-        );
+        ) as HTMLElement;
         const children = categoryToCheck!.children;
         if (children.length === 0) {
             categoryToCheck!.classList.add("eligible-to-play");
@@ -74,21 +78,26 @@ export function findEligibleAction(card: HTMLElement, cardData: CardReference) {
             children.length,
         );
 
-        if (categoryToCheck?.classList.contains("eligible-to-play")) {
-            categoryToCheck!.addEventListener(
-                "click",
-                (e: Event) => {
-                    categoryClickHandler(e, card, abortController);
-                },
-                { signal: abortController.signal },
-            );
+        if (categoryToCheck.classList.contains("eligible-to-play")) {
+            if (autoPlay) {
+                moveToCategory(card, categoryToCheck, abortController);
+            } else {
+                categoryToCheck!.addEventListener(
+                    "click",
+                    (e: Event) => {
+                        const target = e.target as HTMLElement;
+                        moveToCategory(card, target, abortController);
+                    },
+                    { signal: abortController.signal },
+                );
+            }
         }
     });
 }
 
-export function categoryClickHandler(
-    e: Event,
+export function moveToCategory(
     cardToMove: HTMLElement,
+    target: HTMLElement,
     abortController: AbortController,
 ) {
     abortController.abort();
@@ -96,10 +105,9 @@ export function categoryClickHandler(
     // console.log("abort reason", abortController.signal.reason);
     // categoryToCheck!.removeEventListener(
     //     "click",
-    //     categoryClickHandler,
+    //     moveToCategory,
     // );
     const cardRect = cardToMove.getBoundingClientRect();
-    const target = e.target as HTMLElement;
     const targetRect = target.getBoundingClientRect();
     const toMoveX = targetRect.left - cardRect.left;
     const toMoveY = targetRect.top - cardRect.top;
@@ -110,7 +118,7 @@ export function categoryClickHandler(
     setTimeout(() => {
         cardToMove.style.zIndex = "unset";
         cardToMove.style.transform = "translate(0, 0)";
-        moveCard(cardToMove, target, 0);
+        moveCard(cardToMove, target, offset, 10);
     }, animationDurationInSeconds * 1000);
     document.querySelectorAll(".eligible-to-play").forEach((eligibleCard) => {
         eligibleCard.classList.remove("eligible-to-play");

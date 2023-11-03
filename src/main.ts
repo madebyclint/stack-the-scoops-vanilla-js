@@ -126,10 +126,8 @@ console.log("firstCard", firstCard, deckReference[firstCard!.id]);
 /* Sample draw function - this won't be used this way in the game,
    but just an example of how to do it */
 const cardsDealt = deckShuffled.length - deckCount;
-function drawCard(e: Event) {
-    const card = e.target! as HTMLElement;
-    const actions = findEligibleAction(card, deckReference[card.id]);
-    console.log("actions", actions);
+function drawCard(cardTarget: HTMLElement, autoPlay = false) {
+    findEligibleAction(cardTarget, deckReference[cardTarget.id], autoPlay);
     // deckCount = discard(e, deckShuffled.length, deckCount, cardsDealt);
     // if (deckCount === 0) {
     //     alert("no more cards");
@@ -137,5 +135,14 @@ function drawCard(e: Event) {
     // }
 }
 
-drawPile?.addEventListener("click", drawCard);
+function initialDraw() {
+    const drawAmount = 3;
+    const counter = document.querySelector("#count") as HTMLElement;
+    for (let i = 0; i < drawAmount; i++) {
+        deckCount = updateCount(deckCount, counter);
+        drawCard(renderedDeck.pop() as HTMLElement, true);
+    }
+}
+initialDraw();
+// drawPile?.addEventListener("click", drawCard);
 /* End sample draw function */
