@@ -6,7 +6,6 @@ export function dealCards(
     gameBoard: HTMLElement,
     playersArea: HTMLElement,
     renderedDeck: HTMLElement[],
-    deckCount: number,
 ) {
     const playerCount = 2;
     const startingHandSize = 7;
@@ -22,7 +21,7 @@ export function dealCards(
         )! as HTMLElement;
         for (let handIndex = 0; handIndex < startingHandSize; handIndex++) {
             moveCard(renderedDeck.pop()!, player, handIndex, 0, 10);
-            deckCount = updateCount(renderedDeck.length);
+            updateCount(renderedDeck.length);
         }
     }
 }
@@ -30,14 +29,8 @@ export function dealCards(
 export function drawCard(
     cardTarget: HTMLElement,
     cardData: CardReference,
-    deckCount: number,
     initialSetup: boolean = false,
 ) {
-    const actions = findEligibleAction(
-        cardTarget,
-        cardData,
-        initialSetup,
-        deckCount,
-    );
+    const actions = findEligibleAction(cardTarget, cardData, initialSetup);
     console.log("findEligibleActions", actions);
 }

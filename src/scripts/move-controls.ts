@@ -52,10 +52,7 @@ export function findEligibleAction(
     card: HTMLElement,
     cardData: CardReference,
     initialSetup: boolean,
-    deckCount: number,
 ) {
-    console.log("card", card);
-    console.log("cardData", cardData);
     card.classList.remove("face-down");
     card.style.left = "30px";
     card.style.top = "30px";
@@ -64,7 +61,8 @@ export function findEligibleAction(
     const piles = pilesContainer!.querySelectorAll(".play-pile");
     const abortController = new AbortController();
     let playedCard = false;
-    piles.forEach((pile, pileIndex) => {
+    let eligiblePlays = 0;
+    piles.forEach((pile) => {
         if (initialSetup && playedCard) return;
         // check pile for any played cards already
         const pileChildren = pile.querySelectorAll(".card");
@@ -75,17 +73,9 @@ export function findEligibleAction(
         ) as HTMLElement;
         const children = categoryToCheck!.children;
 
-        console.log(
-            "categoryToCheck",
-            categoryToCheck,
-            children,
-            children.length,
-            pileChildren.length,
-            pileIndex,
-        );
-
         if (children.length === 0) {
             categoryToCheck!.classList.add("eligible-to-play");
+            eligiblePlays++;
         }
 
         if (categoryToCheck.classList.contains("eligible-to-play")) {
@@ -105,11 +95,7 @@ export function findEligibleAction(
         }
     });
 
-    let eligiblePlaysLeft =
-        pilesContainer.querySelectorAll(".eligible-to-play");
-    console.log("eligible-to-play", eligiblePlaysLeft);
-    if (!initialSetup && eligiblePlaysLeft.length === 0) {
-        discard(card, 0, 0, 0);
+    if (!initialSetup && eligiblePlays === 0) {
         Toastify({
             // className: "toast",
             text: "Nothing left to play",
@@ -126,6 +112,8 @@ export function findEligibleAction(
             onClick: function () {}, // Callback after click
         }).showToast();
     }
+
+    return eligiblePlays;
 }
 
 export function moveToCategory(

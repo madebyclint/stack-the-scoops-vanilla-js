@@ -2,14 +2,12 @@ import "./style.scss";
 import data from "./cards.json";
 import {
     Card,
-    CardReference,
     buildDeck,
     buildDeckReference,
     shuffleArray,
     updateCount,
 } from "./scripts/deck-controls";
-import { renderDeck, createPlayer } from "./scripts/render-controls";
-import { discard, findEligibleAction, moveCard } from "./scripts/move-controls";
+import { renderDeck } from "./scripts/render-controls";
 import { sleep } from "./scripts/utilities";
 import { dealCards, drawCard } from "./scripts/game-controls";
 
@@ -81,7 +79,7 @@ renderedDeck.forEach((card) => {
 });
 
 /* 6. Deal cards */
-dealCards(gameboardElement, playersArea, renderedDeck, deckCount);
+dealCards(gameboardElement, playersArea, renderedDeck);
 
 /* 7. Prep active player */
 let activePlayer = document.querySelector("#player1") as HTMLElement;
@@ -91,11 +89,6 @@ let activePlayerCards = activePlayer!.querySelectorAll(
 activePlayerCards?.forEach((card: HTMLElement, index: number) => {
     card.classList.remove("face-down");
     card.style.left = index * 60 + "px";
-});
-activePlayer?.addEventListener("click", (e) => {
-    const selectedCard = e.target as HTMLElement;
-    console.log("activePlayer", selectedCard);
-    selectedCard.classList.toggle("selected");
 });
 
 /* 7. Create starter stacks */
@@ -107,7 +100,7 @@ async function setupPlay() {
     for (let i = 0; i < drawAmount; i++) {
         window.requestAnimationFrame(() => {
             const card = renderedDeck.pop() as HTMLElement;
-            drawCard(card, deckReference[card.id], deckCount, true);
+            drawCard(card, deckReference[card.id], true);
             deckCount = updateCount(deckCount);
         });
         await sleep();
@@ -119,9 +112,15 @@ async function setupPlay() {
 
 async function startButtonClickHandler() {
     await setupPlay();
-    drawPile?.addEventListener("click", (e) => {
-        deckCount = updateCount(deckCount);
-        const card = e.target as HTMLElement;
-        drawCard(card, deckReference[card.id], deckCount, false);
+    activePlayer?.addEventListener("click", (e) => {
+        const selectedCard = e.target as HTMLElement;
+        console.log("activePlayer", selectedCard);
+        selectedCard.classList.toggle("selected");
+        drawCard(selectedCard, deckReference[selectedCard.id], false);
     });
+    // drawPile?.addEventListener("click", (e) => {
+    //     deckCount = updateCount(deckCount);
+    //     const card = e.target as HTMLElement;
+    //     drawCard(card, deckReference[card.id], false);
+    // });
 }
