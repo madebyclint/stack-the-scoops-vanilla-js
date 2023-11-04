@@ -126,8 +126,13 @@ console.log("firstCard", firstCard, deckReference[firstCard!.id]);
 /* Sample draw function - this won't be used this way in the game,
    but just an example of how to do it */
 const cardsDealt = deckShuffled.length - deckCount;
-function drawCard(cardTarget: HTMLElement, autoPlay = false) {
-    findEligibleAction(cardTarget, deckReference[cardTarget.id], autoPlay);
+function drawCard(cardTarget: HTMLElement, initialSetup: boolean = false) {
+    const actions = findEligibleAction(
+        cardTarget,
+        deckReference[cardTarget.id],
+        initialSetup,
+    );
+    console.log("findEligibleActions", actions);
     // deckCount = discard(e, deckShuffled.length, deckCount, cardsDealt);
     // if (deckCount === 0) {
     //     alert("no more cards");
@@ -135,14 +140,30 @@ function drawCard(cardTarget: HTMLElement, autoPlay = false) {
     // }
 }
 
-function initialDraw() {
+async function setupPlay() {
     const drawAmount = 3;
     const counter = document.querySelector("#count") as HTMLElement;
     for (let i = 0; i < drawAmount; i++) {
         deckCount = updateCount(deckCount, counter);
-        drawCard(renderedDeck.pop() as HTMLElement, true);
+        window.requestAnimationFrame(() => {
+            drawCard(renderedDeck.pop() as HTMLElement, true);
+        });
+        await sleep();
     }
+    return new Promise((resolve) => {
+        resolve("resolved");
+    });
 }
-initialDraw();
-// drawPile?.addEventListener("click", drawCard);
+
+async function sleep() {
+    return new Promise((resolve) => setTimeout(resolve, 500));
+}
+
+await setupPlay();
+
+drawPile?.addEventListener("click", (e) => {
+    const counter = document.querySelector("#count") as HTMLElement;
+    deckCount = updateCount(deckCount, counter);
+    drawCard(e.target as HTMLElement, false);
+});
 /* End sample draw function */

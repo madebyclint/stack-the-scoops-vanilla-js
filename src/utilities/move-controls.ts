@@ -19,12 +19,11 @@ export function moveCard(
 }
 
 export function discard(
-    e: Event,
+    target: HTMLElement,
     startingDeckCount: number,
     deckCount: number,
     cardsDealt: number,
 ) {
-    const target = e.target as Element;
     const parent = target.closest(".card") as HTMLElement;
     const counter = document.querySelector("#count") as HTMLElement;
     const discardPile = document.querySelector("#discard-pile") as HTMLElement;
@@ -50,7 +49,7 @@ export function dealCard(card: HTMLElement, targetPlayer: HTMLElement) {
 export function findEligibleAction(
     card: HTMLElement,
     cardData: CardReference,
-    autoPlay = false,
+    initialSetup: boolean,
 ) {
     console.log("card", card);
     console.log("cardData", cardData);
@@ -59,28 +58,37 @@ export function findEligibleAction(
     card.style.top = "30px";
     card.style.zIndex = "100";
     const pilesContainer = document.querySelector("#play-piles") as HTMLElement;
-    console.log("piles", pilesContainer);
     const piles = pilesContainer!.querySelectorAll(".play-pile");
     const abortController = new AbortController();
-    piles.forEach((pile) => {
-        console.log("pile", pile);
+    let playedCard = false;
+    piles.forEach((pile, pileIndex) => {
+        if (initialSetup && playedCard) return;
+        // check pile for any played cards already
+        const pileChildren = pile.querySelectorAll(".card");
+        if (initialSetup && pileChildren.length > 0) return;
+
         const categoryToCheck = pile.querySelector(
             `#${pile.id}-${cardData.category}`,
         ) as HTMLElement;
         const children = categoryToCheck!.children;
-        if (children.length === 0) {
-            categoryToCheck!.classList.add("eligible-to-play");
-        }
+
         console.log(
             "categoryToCheck",
             categoryToCheck,
             children,
             children.length,
+            pileChildren.length,
+            pileIndex,
         );
 
+        if (children.length === 0) {
+            categoryToCheck!.classList.add("eligible-to-play");
+        }
+
         if (categoryToCheck.classList.contains("eligible-to-play")) {
-            if (autoPlay) {
+            if (initialSetup) {
                 moveToCategory(card, categoryToCheck, abortController);
+                playedCard = true;
             } else {
                 categoryToCheck!.addEventListener(
                     "click",
@@ -93,6 +101,14 @@ export function findEligibleAction(
             }
         }
     });
+
+    let eligiblePlaysLeft =
+        pilesContainer.querySelectorAll(".eligible-to-play");
+    console.log("eligible-to-play", eligiblePlaysLeft);
+    if (!initialSetup && eligiblePlaysLeft.length === 0) {
+        discard(card, 0, 0, 0);
+        alert("nothing left to play");
+    }
 }
 
 export function moveToCategory(
@@ -118,7 +134,7 @@ export function moveToCategory(
     setTimeout(() => {
         cardToMove.style.zIndex = "unset";
         cardToMove.style.transform = "translate(0, 0)";
-        moveCard(cardToMove, target, offset, 10);
+        moveCard(cardToMove, target, 0);
     }, animationDurationInSeconds * 1000);
     document.querySelectorAll(".eligible-to-play").forEach((eligibleCard) => {
         eligibleCard.classList.remove("eligible-to-play");
