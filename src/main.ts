@@ -2,17 +2,16 @@ import "./style.scss";
 import data from "./cards.json";
 import {
     Card,
+    CardReference,
     buildDeck,
     buildDeckReference,
     shuffleArray,
     updateCount,
-} from "./utilities/deck-controls";
-import { renderDeck, createPlayer } from "./utilities/render-controls";
-import {
-    discard,
-    findEligibleAction,
-    moveCard,
-} from "./utilities/move-controls";
+} from "./scripts/deck-controls";
+import { renderDeck, createPlayer } from "./scripts/render-controls";
+import { discard, findEligibleAction, moveCard } from "./scripts/move-controls";
+import { sleep } from "./scripts/utilities";
+import { dealCards, drawCard } from "./scripts/game-controls";
 
 /* TODO: Is there a way to strong type the json here without
    color being incompatible */
@@ -34,6 +33,7 @@ let deckCount = renderedDeck.length;
 const App = function _App() {
     return `
         <div id="gameboard" class="gameboard fullsize side-by-side">
+            <button id="start-button">Start Game</button>
             <div class="play-area">
                 <div id="draw-pile" class="card-placeholder">Draw pile</div>
                 <div id="discard-pile" class="card-placeholder">Discard pile</div>
@@ -81,28 +81,7 @@ renderedDeck.forEach((card) => {
 });
 
 /* 6. Deal cards */
-const playerCount = 2;
-const startingHandSize = 7;
-for (let playerIndex = 0; playerIndex < playerCount; playerIndex++) {
-    if (gameboardElement.classList.contains("distributed")) {
-        gameboardElement.appendChild(
-            createPlayer(playerIndex + 1, playerCount),
-        );
-        playersArea.remove();
-    } else {
-        playersArea.appendChild(createPlayer(playerIndex + 1, playerCount));
-    }
-    const player = document.querySelector(
-        "#player" + (playerIndex + 1),
-    )! as HTMLElement;
-    for (let handIndex = 0; handIndex < startingHandSize; handIndex++) {
-        moveCard(renderedDeck.pop()!, player, handIndex, 0, 10);
-        deckCount = updateCount(
-            renderedDeck.length,
-            document.querySelector("#count")! as HTMLElement,
-        );
-    }
-}
+dealCards(gameboardElement, playersArea, renderedDeck, deckCount);
 
 /* 7. Prep active player */
 let activePlayer = document.querySelector("#player1") as HTMLElement;
@@ -120,33 +99,16 @@ activePlayer?.addEventListener("click", (e) => {
 });
 
 /* 7. Create starter stacks */
-const firstCard = renderedDeck.pop();
-console.log("firstCard", firstCard, deckReference[firstCard!.id]);
-
-/* Sample draw function - this won't be used this way in the game,
-   but just an example of how to do it */
-const cardsDealt = deckShuffled.length - deckCount;
-function drawCard(cardTarget: HTMLElement, initialSetup: boolean = false) {
-    const actions = findEligibleAction(
-        cardTarget,
-        deckReference[cardTarget.id],
-        initialSetup,
-    );
-    console.log("findEligibleActions", actions);
-    // deckCount = discard(e, deckShuffled.length, deckCount, cardsDealt);
-    // if (deckCount === 0) {
-    //     alert("no more cards");
-    //     drawPile?.removeEventListener("click", drawCard);
-    // }
-}
+const startButton = document.querySelector("#start-button");
+startButton?.addEventListener("click", startButtonClickHandler);
 
 async function setupPlay() {
     const drawAmount = 3;
-    const counter = document.querySelector("#count") as HTMLElement;
     for (let i = 0; i < drawAmount; i++) {
-        deckCount = updateCount(deckCount, counter);
         window.requestAnimationFrame(() => {
-            drawCard(renderedDeck.pop() as HTMLElement, true);
+            const card = renderedDeck.pop() as HTMLElement;
+            drawCard(card, deckReference[card.id], deckCount, true);
+            deckCount = updateCount(deckCount);
         });
         await sleep();
     }
@@ -155,15 +117,11 @@ async function setupPlay() {
     });
 }
 
-async function sleep() {
-    return new Promise((resolve) => setTimeout(resolve, 500));
+async function startButtonClickHandler() {
+    await setupPlay();
+    drawPile?.addEventListener("click", (e) => {
+        deckCount = updateCount(deckCount);
+        const card = e.target as HTMLElement;
+        drawCard(card, deckReference[card.id], deckCount, false);
+    });
 }
-
-await setupPlay();
-
-drawPile?.addEventListener("click", (e) => {
-    const counter = document.querySelector("#count") as HTMLElement;
-    deckCount = updateCount(deckCount, counter);
-    drawCard(e.target as HTMLElement, false);
-});
-/* End sample draw function */

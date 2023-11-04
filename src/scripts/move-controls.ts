@@ -28,7 +28,6 @@ export function discard(
     cardsDealt: number,
 ) {
     const parent = target.closest(".card") as HTMLElement;
-    const counter = document.querySelector("#count") as HTMLElement;
     const discardPile = document.querySelector("#discard-pile") as HTMLElement;
     const index = Math.abs(startingDeckCount - deckCount);
     moveCard(
@@ -41,7 +40,7 @@ export function discard(
         0,
         cardsDealt * constants.DEFAULT_DECK_OFFSET_INCREMENT * -1,
     );
-    deckCount = updateCount(deckCount, counter);
+    deckCount = updateCount(deckCount);
     return deckCount;
 }
 
@@ -53,6 +52,7 @@ export function findEligibleAction(
     card: HTMLElement,
     cardData: CardReference,
     initialSetup: boolean,
+    deckCount: number,
 ) {
     console.log("card", card);
     console.log("cardData", cardData);

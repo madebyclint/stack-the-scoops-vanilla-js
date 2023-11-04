@@ -4,7 +4,7 @@ import {
     buildDeckReference,
     buildDeck,
     shuffleArray,
-} from "../../utilities/deck-controls";
+} from "../../scripts/deck-controls";
 
 describe("deck-controls", () => {
     const cards: Card[] = data.cards as any;
