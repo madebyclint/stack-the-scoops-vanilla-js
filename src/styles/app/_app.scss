@@ -105,5 +105,7 @@
 
     &.selected {
         top: -10px !important;
+        z-index: 100;
+        box-shadow: 0px 0px 20px 2px #000;
     }
 }

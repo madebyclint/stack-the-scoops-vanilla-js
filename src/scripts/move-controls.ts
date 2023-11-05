@@ -53,10 +53,12 @@ export function findEligibleAction(
     cardData: CardReference,
     initialSetup: boolean,
 ) {
+    console.log(
+        "parseInt(card.style.top)",
+        parseInt(card.style.top),
+        card.style.top,
+    );
     card.classList.remove("face-down");
-    card.style.left = "30px";
-    card.style.top = "30px";
-    card.style.zIndex = "100";
     const pilesContainer = document.querySelector("#play-piles") as HTMLElement;
     const piles = pilesContainer!.querySelectorAll(".play-pile");
     const abortController = new AbortController();
