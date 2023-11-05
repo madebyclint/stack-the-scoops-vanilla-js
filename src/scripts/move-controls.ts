@@ -68,31 +68,49 @@ export function findEligibleAction(
         const pileChildren = pile.querySelectorAll(".card");
         if (initialSetup && pileChildren.length > 0) return;
 
-        const categoryToCheck = pile.querySelector(
+        // Check category
+        const categoryCardsToCheck = pile.querySelector(
             `#${pile.id}-${cardData.category}`,
         ) as HTMLElement;
-        const children = categoryToCheck!.children;
+        const children = categoryCardsToCheck!.children;
 
         if (children.length === 0) {
-            categoryToCheck!.classList.add("eligible-to-play");
+            categoryCardsToCheck!.classList.add("eligible-to-play");
+            categoryCardsToCheck.dataset.color = cardData.color;
             eligiblePlays++;
+
+            // if (initialSetup) {
+            //     moveToCategory(card, categoryCardsToCheck, abortController);
+            //     playedCard = true;
+            // } else {
+            //     categoryCardsToCheck!.addEventListener(
+            //         "click",
+            //         (e: Event) => {
+            //             const target = e.target as HTMLElement;
+            //             moveToCategory(card, target, abortController);
+            //         },
+            //         { signal: abortController.signal },
+            //     );
+            // }
+        }
+        console.log("eligible plays after category check", {
+            eligiblePlays,
+        });
+        // End Check Category
+
+        if (initialSetup) {
+            moveToCategory(card, categoryCardsToCheck, abortController);
+            playedCard = true;
+            return { eligiblePlays };
         }
 
-        if (categoryToCheck.classList.contains("eligible-to-play")) {
-            if (initialSetup) {
-                moveToCategory(card, categoryToCheck, abortController);
-                playedCard = true;
-            } else {
-                categoryToCheck!.addEventListener(
-                    "click",
-                    (e: Event) => {
-                        const target = e.target as HTMLElement;
-                        moveToCategory(card, target, abortController);
-                    },
-                    { signal: abortController.signal },
-                );
-            }
-        }
+        // Check colors
+        const colorCardsToCheck = pile.querySelectorAll(
+            `[data-color='${cardData.color}'`,
+        );
+        console.log("colorCards", colorCardsToCheck);
+        // const filteredEligibleSpots = eligibleSpots[cardData.color];
+        // console.log("filteredEligibleSpots", filteredEligibleSpots);
     });
 
     if (!initialSetup && eligiblePlays === 0) {
@@ -113,7 +131,7 @@ export function findEligibleAction(
         }).showToast();
     }
 
-    return eligiblePlays;
+    return { eligiblePlays };
 }
 
 export function moveToCategory(
@@ -124,7 +142,7 @@ export function moveToCategory(
     abortController.abort();
     // console.log("abort signal", abortController.signal.aborted);
     // console.log("abort reason", abortController.signal.reason);
-    // categoryToCheck!.removeEventListener(
+    // categoryCardsToCheck!.removeEventListener(
     //     "click",
     //     moveToCategory,
     // );
