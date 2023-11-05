@@ -58,7 +58,7 @@ export function findEligibleAction(
         parseInt(card.style.top),
         card.style.top,
     );
-    card.classList.remove("face-down");
+    card.classList.add("face-up");
     const pilesContainer = document.querySelector("#play-piles") as HTMLElement;
     const piles = pilesContainer!.querySelectorAll(".play-pile");
     const abortController = new AbortController();

@@ -115,8 +115,19 @@ async function startButtonClickHandler() {
     activePlayer?.addEventListener("click", (e) => {
         const selectedCard = e.target as HTMLElement;
         console.log("activePlayer", selectedCard);
-        selectedCard.classList.toggle("selected");
-        drawCard(selectedCard, deckReference[selectedCard.id], false);
+        // selectedCard.classList.toggle("selected");
+        if (selectedCard.classList.contains("selected")) {
+            selectedCard.classList.remove("selected", "face-up");
+            // combine this with findEligibleAction() so there is no duplicated selectors and logic
+            const eligibleSpots =
+                document.querySelectorAll(".eligible-to-play");
+            eligibleSpots.forEach((spot) => {
+                spot.classList.remove("eligible-to-play");
+            });
+        } else {
+            selectedCard.classList.add("selected");
+            drawCard(selectedCard, deckReference[selectedCard.id], false);
+        }
     });
     // drawPile?.addEventListener("click", (e) => {
     //     deckCount = updateCount(deckCount);
