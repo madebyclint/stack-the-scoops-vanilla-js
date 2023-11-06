@@ -53,17 +53,13 @@ export function findEligibleAction(
     cardData: CardReference,
     initialSetup: boolean,
 ) {
-    console.log(
-        "parseInt(card.style.top)",
-        parseInt(card.style.top),
-        card.style.top,
-    );
     card.classList.remove("face-down");
     const pilesContainer = document.querySelector("#play-piles") as HTMLElement;
     const piles = pilesContainer!.querySelectorAll(".play-pile");
     const abortController = new AbortController();
     let playedCard = false;
     let eligiblePlays = 0;
+    let eligibleSpots = [];
     piles.forEach((pile) => {
         if (initialSetup && playedCard) return;
         // check pile for any played cards already
@@ -76,28 +72,26 @@ export function findEligibleAction(
         ) as HTMLElement;
         const children = categoryCardsToCheck!.children;
 
-        if (children.length === 0) {
-            categoryCardsToCheck!.classList.add("eligible-to-play");
+        if (children.length === 0 && !initialSetup) {
             categoryCardsToCheck.dataset.color = cardData.color;
-            eligiblePlays++;
-
-            // if (initialSetup) {
-            //     moveToCategory(card, categoryCardsToCheck, abortController);
-            //     playedCard = true;
-            // } else {
-            //     categoryCardsToCheck!.addEventListener(
-            //         "click",
-            //         (e: Event) => {
-            //             const target = e.target as HTMLElement;
-            //             moveToCategory(card, target, abortController);
-            //         },
-            //         { signal: abortController.signal },
-            //     );
-            // }
+            const thisPile = document.querySelector(`#${pile.id}`);
+            const pileChildren = thisPile?.querySelectorAll(
+                `.card[data-color='${card.dataset.color}'`,
+            );
+            if (pileChildren?.length > 0) {
+                categoryCardsToCheck!.classList.add("eligible-to-play");
+                eligiblePlays++;
+                eligibleSpots.push(categoryCardsToCheck);
+                categoryCardsToCheck!.addEventListener(
+                    "click",
+                    (e: Event) => {
+                        const target = e.target as HTMLElement;
+                        moveToCategory(card, target, abortController);
+                    },
+                    { signal: abortController.signal },
+                );
+            }
         }
-        console.log("eligible plays after category check", {
-            eligiblePlays,
-        });
         // End Check Category
 
         if (initialSetup) {
@@ -105,14 +99,6 @@ export function findEligibleAction(
             playedCard = true;
             return { eligiblePlays };
         }
-
-        // Check colors
-        const colorCardsToCheck = pile.querySelectorAll(
-            `[data-color='${cardData.color}'`,
-        );
-        console.log("colorCards", colorCardsToCheck);
-        // const filteredEligibleSpots = eligibleSpots[cardData.color];
-        // console.log("filteredEligibleSpots", filteredEligibleSpots);
     });
 
     if (!initialSetup && eligiblePlays === 0) {
