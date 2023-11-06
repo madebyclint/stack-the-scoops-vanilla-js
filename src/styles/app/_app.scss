@@ -92,7 +92,6 @@
     position: absolute;
     box-shadow: 1px 1px 1px 1px #000;
     background-image: url(/cards-spritesheet-175h.png);
-    background-position: -4788px -2px !important;
     background-size: auto 180px;
     background-color: $white;
     zoom: 1;
@@ -100,8 +99,8 @@
         visibility: hidden;
     }
 
-    &.face-up {
-        background-position: unset !important;
+    &.face-down {
+        background-position: -4788px -2px !important;
     }
 
     &.selected {

@@ -117,7 +117,8 @@ async function startButtonClickHandler() {
         console.log("activePlayer", selectedCard);
         // selectedCard.classList.toggle("selected");
         if (selectedCard.classList.contains("selected")) {
-            selectedCard.classList.remove("selected", "face-up");
+            selectedCard.classList.remove("selected");
+            selectedCard.classList.add("face-down");
             // combine this with findEligibleAction() so there is no duplicated selectors and logic
             const eligibleSpots =
                 document.querySelectorAll(".eligible-to-play");
