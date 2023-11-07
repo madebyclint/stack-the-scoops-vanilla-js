@@ -134,6 +134,7 @@ export function moveToCategory(
     //     "click",
     //     moveToCategory,
     // );
+    cardToMove.classList.remove("selected");
     const cardRect = cardToMove.getBoundingClientRect();
     const targetRect = target.getBoundingClientRect();
     const toMoveX = targetRect.left - cardRect.left;
