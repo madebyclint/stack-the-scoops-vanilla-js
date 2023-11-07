@@ -78,7 +78,7 @@ export function findEligibleAction(
             const pileChildren = thisPile?.querySelectorAll(
                 `.card[data-color='${card.dataset.color}'`,
             );
-            if (pileChildren?.length > 0) {
+            if (pileChildren!.length > 0) {
                 categoryCardsToCheck!.classList.add("eligible-to-play");
                 eligiblePlays++;
                 eligibleSpots.push(categoryCardsToCheck);
