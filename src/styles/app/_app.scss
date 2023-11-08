@@ -40,7 +40,7 @@
 
 .card-shape {
     border: 1px solid $white;
-    border-radius: 5px;
+    border-radius: 10px;
     aspect-ratio: calc($cardWidth / $cardHeight);
     width: $cardWidth;
     // height: $cardHeight;

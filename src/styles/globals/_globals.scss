@@ -36,6 +36,53 @@ h1 {
     line-height: 1.1;
 }
 
+button {
+    display: inline-block;
+    vertical-align: middle;
+    transform: translateZ(0);
+    appearance: button;
+    transition: filter 0.2s;
+    cursor: pointer;
+    box-sizing: border-box;
+    margin: 0;
+    margin: 10px;
+    outline: none;
+    border: solid transparent;
+    border-width: 0 0 4px;
+    border-radius: 16px;
+    background-color: #1899d6;
+    padding: 13px 16px;
+    width: 100%;
+    overflow: visible;
+    touch-action: manipulation;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 20px;
+    font-family: din-round, sans-serif;
+    letter-spacing: 0.8px;
+    user-select: none;
+    -webkit-user-select: none;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: -4px;
+        left: 0;
+        z-index: -1;
+        border: solid transparent;
+        border-width: 0 0 4px;
+        border-radius: 16px;
+        background-clip: padding-box;
+        background-color: #1cb0f6;
+        content: "";
+    }
+}
+
 @media (prefers-color-scheme: light) {
     :root {
         background-color: #ffffff;
