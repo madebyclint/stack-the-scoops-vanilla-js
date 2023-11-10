@@ -143,6 +143,7 @@ export function moveToCategory(
     cardToMove.style.zIndex = "1000";
     cardToMove.style.transition = `all ${animationDurationInSeconds}s ease-out`;
     cardToMove.style.transform = `translate(${toMoveX}px, ${toMoveY}px)`;
+    // TODO: Turn this into a promise somehow?
     setTimeout(() => {
         cardToMove.style.zIndex = "unset";
         cardToMove.style.transform = "translate(0, 0)";
