@@ -154,12 +154,16 @@ export function moveToCategory(
     calculateScore(target);
 }
 
-export function calculateScore(targetCard) {
-    console.log("target", targetCard);
-    const pile = targetCard.closest(".play-pile");
+export function calculateScore(targetPlaceholder: HTMLElement) {
+    console.log("target", targetPlaceholder);
+    const pile = targetPlaceholder.closest(".play-pile") as HTMLElement;
     console.log("pile", pile);
-    const pileCards = pile.querySelectorAll(".card");
+    const pileCards = pile.querySelectorAll(".card") as NodeListOf<HTMLElement>;
+    let score = parseFloat(targetPlaceholder.dataset.value!);
+    console.log("score", score);
     pileCards.forEach((card) => {
-        console.log("card", card, card.dataset.points);
+        console.log("card", card, card.dataset.value);
+        score += parseFloat(card.dataset.value!);
     });
+    console.log("score", score);
 }
