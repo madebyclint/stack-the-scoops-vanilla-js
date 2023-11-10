@@ -151,4 +151,9 @@ export function moveToCategory(
     document.querySelectorAll(".eligible-to-play").forEach((eligibleCard) => {
         eligibleCard.classList.remove("eligible-to-play");
     });
+    calculateScore(target);
+}
+
+export function calculateScore(target) {
+    console.log("target", target);
 }
