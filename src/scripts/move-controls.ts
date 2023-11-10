@@ -151,15 +151,18 @@ export function moveToCategory(
     document.querySelectorAll(".eligible-to-play").forEach((eligibleCard) => {
         eligibleCard.classList.remove("eligible-to-play");
     });
-    calculateScore(target);
+    calculateScore(target, cardToMove);
 }
 
-export function calculateScore(targetPlaceholder: HTMLElement) {
+export function calculateScore(
+    targetPlaceholder: HTMLElement,
+    playedCard: HTMLElement,
+) {
     console.log("target", targetPlaceholder);
     const pile = targetPlaceholder.closest(".play-pile") as HTMLElement;
     console.log("pile", pile);
     const pileCards = pile.querySelectorAll(".card") as NodeListOf<HTMLElement>;
-    let score = parseFloat(targetPlaceholder.dataset.value!);
+    let score = parseFloat(playedCard.dataset.value!);
     console.log("score", score);
     pileCards.forEach((card) => {
         console.log("card", card, card.dataset.value);
