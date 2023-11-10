@@ -154,6 +154,12 @@ export function moveToCategory(
     calculateScore(target);
 }
 
-export function calculateScore(target) {
-    console.log("target", target);
+export function calculateScore(targetCard) {
+    console.log("target", targetCard);
+    const pile = targetCard.closest(".play-pile");
+    console.log("pile", pile);
+    const pileCards = pile.querySelectorAll(".card");
+    pileCards.forEach((card) => {
+        console.log("card", card, card.dataset.points);
+    });
 }
