@@ -2,10 +2,7 @@ export type CardColor = "pink" | "green";
 
 export type CardType = "Base" | "Scoop" | "Topping" | "Bonus";
 
-export enum CardFunction {
-    Add,
-    Multiply,
-}
+export type CardFunction = "add" | "multiply";
 
 export enum CardSource {
     Original,
@@ -39,6 +36,7 @@ export interface CardReference extends CardBase {
     color: CardColor;
     image: string;
     qty: number;
+    cardFunction: CardFunction;
 }
 
 export type CardIndex = {
@@ -57,6 +55,7 @@ export function buildDeckReference(cards: Card[]) {
                     color,
                     card.category,
                     card.value,
+                    card.cardFunction,
                     card.name.replaceAll(" ", ""),
                 ]
                     .join("-")
@@ -65,6 +64,7 @@ export function buildDeckReference(cards: Card[]) {
                 name: card.name,
                 value: card.value,
                 category: card.category,
+                cardFunction: card.cardFunction,
                 color,
                 image: card.image[color],
                 source: card.source,

@@ -210,7 +210,7 @@
             "value": 3,
             "category": "scoop",
             "qtyPerColor": 2,
-            "function": "add",
+            "cardFunction": "add",
             "source": "original game",
             "image": {
                 "pink": "/cards/pink/scoops/scoops-pink-scoop-3-mintchip.png",
@@ -227,7 +227,7 @@
             "value": 3,
             "category": "scoop",
             "qtyPerColor": 2,
-            "function": "add",
+            "cardFunction": "add",
             "source": "original game",
             "image": {
                 "pink": "/cards/pink/scoops/scoops-pink-scoop-3-butterpecan.png",
@@ -244,7 +244,7 @@
             "value": 2,
             "category": "scoop",
             "qtyPerColor": 3,
-            "function": "add",
+            "cardFunction": "add",
             "source": "original game",
             "image": {
                 "pink": "/cards/pink/scoops/scoops-pink-scoop-2-neapolitan.png",
@@ -261,7 +261,7 @@
             "value": 2,
             "category": "scoop",
             "qtyPerColor": 3,
-            "function": "add",
+            "cardFunction": "add",
             "source": "original game",
             "image": {
                 "pink": "/cards/pink/scoops/scoops-pink-scoop-2-strawberry.png",
@@ -278,7 +278,7 @@
             "value": 1,
             "category": "scoop",
             "qtyPerColor": 4,
-            "function": "add",
+            "cardFunction": "add",
             "source": "original game",
             "image": {
                 "pink": "/cards/pink/scoops/scoops-pink-scoop-1-chocolate.png",
@@ -295,7 +295,7 @@
             "value": 1,
             "category": "scoop",
             "qtyPerColor": 4,
-            "function": "add",
+            "cardFunction": "add",
             "source": "original game",
             "image": {
                 "pink": "/cards/pink/scoops/scoops-pink-scoop-1-vanilla.png",
