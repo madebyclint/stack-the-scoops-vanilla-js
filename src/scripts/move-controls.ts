@@ -143,16 +143,15 @@ export function moveToCategory(
     cardToMove.style.zIndex = "1000";
     cardToMove.style.transition = `all ${animationDurationInSeconds}s ease-out`;
     cardToMove.style.transform = `translate(${toMoveX}px, ${toMoveY}px)`;
-    // TODO: Turn this into a promise somehow?
     setTimeout(() => {
         cardToMove.style.zIndex = "unset";
         cardToMove.style.transform = "translate(0, 0)";
         moveCard(cardToMove, target, 0);
+        calculateScore(target, cardToMove);
     }, animationDurationInSeconds * 1000);
     document.querySelectorAll(".eligible-to-play").forEach((eligibleCard) => {
         eligibleCard.classList.remove("eligible-to-play");
     });
-    calculateScore(target, cardToMove);
 }
 
 export function calculateScore(
@@ -160,12 +159,23 @@ export function calculateScore(
     playedCard: HTMLElement,
 ) {
     console.log("target", targetPlaceholder);
+    const completeSet = {
+        topping: false,
+        scoop: false,
+        base: false,
+        bonus: false,
+    };
     const pile = targetPlaceholder.closest(".play-pile") as HTMLElement;
     console.log("pile", pile);
     const pileCards = pile.querySelectorAll(".card") as NodeListOf<HTMLElement>;
-    let score = parseFloat(playedCard.dataset.value!);
+    let score = 0;
     console.log("score", score);
     pileCards.forEach((card) => {
+        const category = card.dataset.category as keyof typeof completeSet;
+        completeSet[category] = true;
+        if (completeSet.topping && completeSet.scoop && completeSet.base) {
+            alert("you completed a set!");
+        }
         console.log("card", card, card.dataset.value);
         score += parseFloat(card.dataset.value!);
     });

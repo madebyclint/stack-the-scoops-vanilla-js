@@ -7,6 +7,7 @@ export function renderCard(card: CardReference, key: string) {
     cardShell.id = key;
     cardShell.dataset.color = card.color;
     cardShell.dataset.value = card.value.toString();
+    cardShell.dataset.category = card.category;
 
     const title = document.createElement("p");
     title.innerText = card.name;
