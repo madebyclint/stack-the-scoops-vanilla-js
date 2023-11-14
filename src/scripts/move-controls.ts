@@ -53,14 +53,14 @@ export function findEligibleAction(
     card: HTMLElement,
     cardData: CardReference,
     initialSetup: boolean,
-) {
+): { eligiblePlays: number; eligibleSpots: HTMLElement[] } {
     card.classList.remove("face-down");
     const pilesContainer = document.querySelector("#play-piles") as HTMLElement;
     const piles = pilesContainer!.querySelectorAll(".play-pile");
     const abortController = new AbortController();
     let playedCard = false;
     let eligiblePlays = 0;
-    let eligibleSpots = [];
+    let eligibleSpots = [] as HTMLElement[];
     piles.forEach((pile) => {
         if (initialSetup && playedCard) return;
         // check pile for any played cards already
@@ -96,9 +96,11 @@ export function findEligibleAction(
         // End Check Category
 
         if (initialSetup) {
+            eligiblePlays++;
+            eligibleSpots.push(categoryCardsToCheck);
             moveToCategory(card, categoryCardsToCheck, abortController);
             playedCard = true;
-            return { eligiblePlays };
+            return { eligiblePlays, eligibleSpots };
         }
     });
 
@@ -120,7 +122,7 @@ export function findEligibleAction(
         }).showToast();
     }
 
-    return { eligiblePlays };
+    return { eligiblePlays, eligibleSpots };
 }
 
 export function moveToCategory(
