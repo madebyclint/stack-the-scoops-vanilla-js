@@ -25,3 +25,12 @@ export function dealCards(
         }
     }
 }
+
+export function drawCard(
+    cardTarget: HTMLElement,
+    cardData: CardReference,
+    initialSetup: boolean = false,
+) {
+    const actions = findEligibleAction(cardTarget, cardData, initialSetup);
+    console.log("findEligibleActions", actions);
+}

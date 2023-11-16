@@ -9,8 +9,7 @@ import {
 } from "./scripts/deck-controls";
 import { renderDeck } from "./scripts/render-controls";
 import { sleep } from "./scripts/utilities";
-import { dealCards } from "./scripts/game-controls";
-import { findEligibleAction } from "./scripts/move-controls";
+import { dealCards, drawCard } from "./scripts/game-controls";
 
 /* TODO: Is there a way to strong type the json here without
    color being incompatible */
@@ -101,12 +100,7 @@ async function setupPlay() {
     for (let i = 0; i < drawAmount; i++) {
         window.requestAnimationFrame(() => {
             const card = renderedDeck.pop() as HTMLElement;
-            const actions = findEligibleAction(
-                card,
-                deckReference[card.id],
-                true,
-            );
-            console.log("initial actions", actions);
+            drawCard(card, deckReference[card.id], true);
             deckCount = updateCount(deckCount);
         });
         await sleep();
@@ -132,12 +126,12 @@ async function startButtonClickHandler() {
             });
         } else {
             selectedCard.classList.add("selected");
-            const actions = findEligibleAction(
-                selectedCard,
-                deckReference[selectedCard.id],
-                true,
-            );
-            console.log("initial actions", actions);
+            drawCard(selectedCard, deckReference[selectedCard.id], false);
         }
     });
+    // drawPile?.addEventListener("click", (e) => {
+    //     deckCount = updateCount(deckCount);
+    //     const card = e.target as HTMLElement;
+    //     drawCard(card, deckReference[card.id], false);
+    // });
 }
