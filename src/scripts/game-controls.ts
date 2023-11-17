@@ -20,7 +20,7 @@ export function dealCards(
             "#player" + (playerIndex + 1),
         )! as HTMLElement;
         for (let handIndex = 0; handIndex < startingHandSize; handIndex++) {
-            moveCard(renderedDeck.pop()!, player, handIndex, 0, 10);
+            moveCard(renderedDeck.pop()!, player, handIndex, 0, 0);
             updateCount(renderedDeck.length);
         }
     }

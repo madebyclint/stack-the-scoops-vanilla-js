@@ -109,3 +109,33 @@
         box-shadow: 0px 0px 20px 2px #000;
     }
 }
+
+$leftIncrement: 30px;
+.player1 {
+    .card {
+        &:nth-child(2) {
+            left: 2 * $leftIncrement !important;
+            z-index: 200;
+        }
+        &:nth-child(3) {
+            left: 4 * $leftIncrement !important;
+            z-index: 210;
+        }
+        &:nth-child(4) {
+            left: 6 * $leftIncrement !important;
+            z-index: 220;
+        }
+        &:nth-child(5) {
+            left: 8 * $leftIncrement !important;
+            z-index: 230;
+        }
+        &:nth-child(6) {
+            left: 10 * $leftIncrement !important;
+            z-index: 240;
+        }
+        &:nth-child(7) {
+            left: 12 * $leftIncrement !important;
+            z-index: 250;
+        }
+    }
+}

@@ -88,7 +88,7 @@ let activePlayerCards = activePlayer!.querySelectorAll(
 ) as NodeListOf<HTMLElement>;
 activePlayerCards?.forEach((card: HTMLElement, index: number) => {
     card.classList.remove("face-down");
-    card.style.left = index * 60 + "px";
+    card.style.left = index * 0 + "px";
 });
 
 /* 7. Create starter stacks */

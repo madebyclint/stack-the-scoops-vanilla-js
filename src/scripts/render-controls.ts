@@ -57,7 +57,8 @@ export function createPlayer(playerIndex: number, playerCount: number) {
     const title = document.createElement("p");
     title.className = "label";
     title.innerText = "Player " + playerIndex;
-    player.appendChild(title);
+    // player.appendChild(title); @TODO: Fix this
+    document.body.appendChild(title);
 
     return player;
 }
