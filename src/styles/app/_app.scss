@@ -111,7 +111,7 @@
 }
 
 $leftIncrement: 30px;
-.player1 {
+.player-position {
     .card {
         &:nth-child(2) {
             left: 2 * $leftIncrement !important;

@@ -82,7 +82,9 @@ renderedDeck.forEach((card) => {
 dealCards(gameboardElement, playersArea, renderedDeck);
 
 /* 7. Prep active player */
-let activePlayer = document.querySelector("#player1") as HTMLElement;
+let activePlayer = document
+    .querySelector("#players-area")
+    ?.querySelector(".player-position") as HTMLElement;
 let activePlayerCards = activePlayer!.querySelectorAll(
     ".card",
 ) as NodeListOf<HTMLElement>;
@@ -112,9 +114,13 @@ async function setupPlay() {
 
 async function startButtonClickHandler() {
     await setupPlay();
-    activePlayer?.addEventListener("click", (e) => {
+    activatePlayer(activePlayer);
+}
+
+function activatePlayer(selectedPlayer: HTMLElement) {
+    selectedPlayer?.addEventListener("click", (e) => {
         const selectedCard = e.target as HTMLElement;
-        console.log("activePlayer", selectedCard);
+        console.log("selectedPlayer", selectedCard);
         // selectedCard.classList.toggle("selected");
         if (selectedCard.classList.contains("selected")) {
             selectedCard.classList.remove("selected");
@@ -129,9 +135,4 @@ async function startButtonClickHandler() {
             drawCard(selectedCard, deckReference[selectedCard.id], false);
         }
     });
-    // drawPile?.addEventListener("click", (e) => {
-    //     deckCount = updateCount(deckCount);
-    //     const card = e.target as HTMLElement;
-    //     drawCard(card, deckReference[card.id], false);
-    // });
 }
