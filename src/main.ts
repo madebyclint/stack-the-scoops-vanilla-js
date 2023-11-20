@@ -118,21 +118,28 @@ async function startButtonClickHandler() {
 }
 
 function activatePlayer(selectedPlayer: HTMLElement) {
-    selectedPlayer?.addEventListener("click", (e) => {
-        const selectedCard = e.target as HTMLElement;
-        console.log("selectedPlayer", selectedCard);
-        // selectedCard.classList.toggle("selected");
-        if (selectedCard.classList.contains("selected")) {
-            selectedCard.classList.remove("selected");
-            // combine this with findEligibleAction() so there is no duplicated selectors and logic
-            const eligibleSpots =
-                document.querySelectorAll(".eligible-to-play");
-            eligibleSpots.forEach((spot) => {
-                spot.classList.remove("eligible-to-play");
-            });
-        } else {
-            selectedCard.classList.add("selected");
-            drawCard(selectedCard, deckReference[selectedCard.id], false);
-        }
-    });
+    const abortController = new AbortController();
+    // TODO: Switch active listeners here?
+    selectedPlayer?.addEventListener(
+        "click",
+        (e) => {
+            abortController.abort();
+            const selectedCard = e.target as HTMLElement;
+            console.log("selectedPlayer", selectedCard);
+            // selectedCard.classList.toggle("selected");
+            if (selectedCard.classList.contains("selected")) {
+                selectedCard.classList.remove("selected");
+                // combine this with findEligibleAction() so there is no duplicated selectors and logic
+                const eligibleSpots =
+                    document.querySelectorAll(".eligible-to-play");
+                eligibleSpots.forEach((spot) => {
+                    spot.classList.remove("eligible-to-play");
+                });
+            } else {
+                selectedCard.classList.add("selected");
+                drawCard(selectedCard, deckReference[selectedCard.id], false);
+            }
+        },
+        { signal: abortController.signal },
+    );
 }
