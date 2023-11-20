@@ -9,7 +9,7 @@ import {
 } from "./scripts/deck-controls";
 import { renderDeck } from "./scripts/render-controls";
 import { sleep } from "./scripts/utilities";
-import { dealCards, drawCard } from "./scripts/game-controls";
+import { dealCards, drawCard, playCard } from "./scripts/game-controls";
 
 /* TODO: Is there a way to strong type the json here without
    color being incompatible */
@@ -123,22 +123,12 @@ function activatePlayer(selectedPlayer: HTMLElement) {
     selectedPlayer?.addEventListener(
         "click",
         (e) => {
-            abortController.abort();
             const selectedCard = e.target as HTMLElement;
-            console.log("selectedPlayer", selectedCard);
-            // selectedCard.classList.toggle("selected");
-            if (selectedCard.classList.contains("selected")) {
-                selectedCard.classList.remove("selected");
-                // combine this with findEligibleAction() so there is no duplicated selectors and logic
-                const eligibleSpots =
-                    document.querySelectorAll(".eligible-to-play");
-                eligibleSpots.forEach((spot) => {
-                    spot.classList.remove("eligible-to-play");
-                });
-            } else {
-                selectedCard.classList.add("selected");
-                drawCard(selectedCard, deckReference[selectedCard.id], false);
-            }
+            playCard(
+                selectedCard,
+                deckReference[selectedCard.id],
+                abortController,
+            );
         },
         { signal: abortController.signal },
     );

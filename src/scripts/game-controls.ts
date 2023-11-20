@@ -34,3 +34,24 @@ export function drawCard(
     const actions = findEligibleAction(cardTarget, cardData, initialSetup);
     console.log("findEligibleActions", actions);
 }
+
+export function playCard(
+    selectedCard: HTMLElement,
+    cardData: CardReference,
+    abortController: AbortController,
+) {
+    abortController.abort();
+    console.log("selectedPlayer", selectedCard);
+    // selectedCard.classList.toggle("selected");
+    if (selectedCard.classList.contains("selected")) {
+        selectedCard.classList.remove("selected");
+        // combine this with findEligibleAction() so there is no duplicated selectors and logic
+        const eligibleSpots = document.querySelectorAll(".eligible-to-play");
+        eligibleSpots.forEach((spot) => {
+            spot.classList.remove("eligible-to-play");
+        });
+    } else {
+        selectedCard.classList.add("selected");
+        drawCard(selectedCard, cardData, false);
+    }
+}
