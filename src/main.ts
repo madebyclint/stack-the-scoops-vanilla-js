@@ -9,7 +9,12 @@ import {
 } from "./scripts/deck-controls";
 import { renderDeck } from "./scripts/render-controls";
 import { sleep } from "./scripts/utilities";
-import { dealCards, drawCard, playCard } from "./scripts/game-controls";
+import {
+    dealCards,
+    drawCard,
+    getNextPlayer,
+    playCard,
+} from "./scripts/game-controls";
 
 /* TODO: Is there a way to strong type the json here without
    color being incompatible */
@@ -124,11 +129,15 @@ function activatePlayer(selectedPlayer: HTMLElement) {
         "click",
         (e) => {
             const selectedCard = e.target as HTMLElement;
+            const nextPlayer = getNextPlayer(activePlayer);
+
             playCard(
                 selectedCard,
                 deckReference[selectedCard.id],
                 abortController,
             );
+
+            activatePlayer(nextPlayer as HTMLElement);
         },
         { signal: abortController.signal },
     );

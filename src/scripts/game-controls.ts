@@ -55,3 +55,14 @@ export function playCard(
         drawCard(selectedCard, cardData, false);
     }
 }
+
+export function getNextPlayer(activePlayer: HTMLElement) {
+    const otherPlayers = document
+        .querySelector("#players-area")
+        ?.querySelectorAll(".player-position") as NodeListOf<HTMLElement>;
+    return Array.from(otherPlayers).find((player) => {
+        if (player !== activePlayer) {
+            return player;
+        }
+    });
+}
